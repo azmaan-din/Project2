@@ -12,7 +12,7 @@ public class WhoWantsToBeAMillionaire {
     public static void main(String[] args) throws IOException {
 
         Database test = new Database();
-        test.connectProject2DB();
+        test.userDataTable();
 
 
         // Calling the start method  
