@@ -7,6 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class FeedbackDisplay extends JPanel {
         setLayout(new BorderLayout());
 
         feedbackTextArea = new JTextArea(10, 30);
+        feedbackTextArea.setBackground(Color.BLACK); 
         JScrollPane scrollPane = new JScrollPane(feedbackTextArea);
         add(scrollPane, BorderLayout.CENTER);
 
