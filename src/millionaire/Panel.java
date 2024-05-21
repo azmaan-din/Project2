@@ -5,6 +5,7 @@
 package millionaire;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JPanel;
 import java.awt.Graphics;
@@ -31,6 +32,7 @@ public class Panel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
+        setBackground(Color.BLACK); 
 
         startButton = new JButton("Start");
         startButton.setBounds(100, 80, 100, 40);
@@ -68,18 +70,27 @@ public class Panel extends JPanel {
 
         feedbackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("feedback was clicked");
-            }
-        });
+            cardLayout.show(mainPanel, "FeedbackDisplay");
+    }
+});
 
+    }
+
+    private JButton createButton(String text, int x, int y) {
+        JButton button = new JButton(text);
+        button.setBounds(x, y, 200, 40);
+        button.setForeground(Color.BLUE);  // Set text color to white
+        button.setBackground(new Color(0x007BFF));  // Set button color (Bootstrap Primary)
+        add(button);
+        return button;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        g.setColor(Color.ORANGE);  // Set text color to white
         g.drawString("Who Want to be a Millionaire", ((getSize().width - 250) / 2), 30);
-
     }
 
 }
