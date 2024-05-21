@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 public class RulesDisplay extends JPanel {
 
@@ -13,9 +14,11 @@ public class RulesDisplay extends JPanel {
 
     public RulesDisplay() {
         setLayout(new BorderLayout());
+        setBackground(Color.BLUE); // Set background color to black
 
         rulesTextArea = new JTextArea();
         rulesTextArea.setEditable(false);
+        rulesTextArea.setForeground(Color.RED); // Set text color to white
         add(rulesTextArea, BorderLayout.CENTER);
 
         loadRules();
