@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 public class WhoWantsToBeAMillionaire {
 
     public static void main(String[] args) throws IOException, SQLException {
-        
+        //hi
         
         JFrame frame = new JFrame("Who Want to be a Millionaire");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
