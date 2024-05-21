@@ -26,10 +26,10 @@ public class WhoWantsToBeAMillionaire {
         JPanel mainPanel = new JPanel(cardLayout);
         
         Panel initialPanel = new Panel(cardLayout, mainPanel);
-        StartPage startPage = new StartPage(cardLayout, mainPanel);
+        UserDataPage userDataPage = new UserDataPage(cardLayout, mainPanel);
         
         mainPanel.add(initialPanel, "InitialPanel");
-        mainPanel.add(startPage, "StartPage");
+        mainPanel.add(userDataPage, "UserDataPage");
         
         
         frame.add(mainPanel);

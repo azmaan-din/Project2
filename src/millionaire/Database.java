@@ -42,7 +42,7 @@ public class Database {
     }
     
         public void leaderboardTable() {
-        String leaderboardTableSQl = "CREATE TABLE EXISTS LEADERBOARD ("
+        String leaderboardTableSQl = "CREATE TABLE LEADERBOARD ("
                 + "LEADERBOARDID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
                 + "FIRSTNAME VARCHAR(50), "
                 + "LASTNAME VARCHAR(50), "

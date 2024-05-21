@@ -50,7 +50,7 @@ public class Panel extends JPanel {
 
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "StartPage");
+                cardLayout.show(mainPanel, "UserDataPage");
             }
         });
 
