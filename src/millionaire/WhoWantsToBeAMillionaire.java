@@ -1,51 +1,27 @@
 package millionaire;
 
-/**
- *
- * @author Azmaan, Yash
- */
-// Importing IOException class from java.io package
-
-import java.awt.CardLayout;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
+/**
+ * Main class to start the game.
+ */
 public class WhoWantsToBeAMillionaire {
 
     public static void main(String[] args) throws IOException, SQLException {
-        //hi
-        
-        JFrame frame = new JFrame("Who Want to be a Millionaire");
+        JFrame frame = new JFrame("Who Wants to be a Millionaire");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700,700);
-        frame.setLocationRelativeTo(null);
-        
-        CardLayout cardLayout = new CardLayout();
-        JPanel mainPanel = new JPanel(cardLayout);
-        
-        Panel initialPanel = new Panel(cardLayout, mainPanel);
-        StartPage startPage = new StartPage(cardLayout, mainPanel);
-        
-        mainPanel.add(initialPanel, "InitialPanel");
-        mainPanel.add(startPage, "StartPage");
-        
-        
-        frame.add(mainPanel);
-        
-        cardLayout.show(mainPanel, "InitialPanel");
-        
+        Panel panel = new Panel();
+        frame.add(panel);
+        frame.setSize(700, 700);
         frame.setVisible(true);
         
-
-        
         Database data = new Database();
-        //calls create table 
         data.userDataTable();
         data.leaderboardTable();
-        
-      
-    }
 
+        // Starting the game loop if needed
+        // Start.start();
+    }
 }
