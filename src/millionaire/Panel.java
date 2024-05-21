@@ -56,7 +56,7 @@ public class Panel extends JPanel {
 
         rulesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("rules was clicked");
+                cardLayout.show(mainPanel, "RulesDisplay");
             }
         });
 

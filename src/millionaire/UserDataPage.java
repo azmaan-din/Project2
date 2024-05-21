@@ -72,8 +72,11 @@ public class UserDataPage extends JPanel {
                 UserFileHandler userFileHandler = new UserFileHandler();
                 try {
                     userFileHandler.storeUserDataToDatabase(userData);
-                    // You can add more actions here, like navigating to another page
+                    GamePanel gamePanel = new GamePanel(cardLayout, mainPanel, userData);
+                    mainPanel.add(gamePanel, "GamePanel");
+                    cardLayout.show(mainPanel, "GamePanel");
                 } catch (SQLException ex) {
+                    System.out.println("error in User Data Page");
                     Logger.getLogger(UserDataPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
