@@ -6,6 +6,7 @@ package millionaire;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -18,9 +19,9 @@ import java.util.List;
  */
 public class Leaderboard {
     // method for leaderboard
-    public static void displayLeaderboard() {
+    public static void displayLeaderboard() throws SQLException {
         try {
-            List<Data> allUserData = UserFileHandler.getAllUserData();
+            List<Data> allUserData = new UserFileHandler().getAllUserData();
 
             if (allUserData.isEmpty()) {
                 System.out.println("No user data found.");

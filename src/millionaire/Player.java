@@ -5,9 +5,9 @@ package millionaire;
  * @author Azmaan, Yash
  */
 public class Player extends Data {
-    public Player(String firstname, String lastname, int age, int money) {
+    public Player(int userid,String firstname, String lastname, int age, int money) {
         // calling the constructor 
-        super(firstname, lastname, age, money);
+        super(userid, firstname, lastname, age, money);
 
     }
 

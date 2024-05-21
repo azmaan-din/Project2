@@ -2,6 +2,7 @@
 package millionaire;
 
 public class Data {
+    private int userid;
     //storing the first name
     private String firstname;
     //storing the last name
@@ -11,11 +12,20 @@ public class Data {
     //storing money
     private int money;
 
-    public Data(String firstname, String lastname, int age, int money) {
+    public Data(int userid, String firstname, String lastname, int age, int money) {
+        this.userid = userid;
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
         this.money = money;
+    }
+    
+    public int getUserId(){
+        return userid;
+    }
+    
+    public void setUserId(int userid){
+        this.userid = userid;
     }
 
     // get the first name

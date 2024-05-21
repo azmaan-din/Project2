@@ -3,8 +3,11 @@ package millionaire;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,9 +17,10 @@ public class Game {
     private static final Scanner scanner = new Scanner(System.in);
 
     // method starting game
-    public static void Game() throws IOException {
+    public static void Game() throws IOException, SQLException {
         // getting user information
         Player userData = CollectUserData.collectUserData(scanner);
+        UserFileHandler userFileHandler = new UserFileHandler();
         // printing player details
         System.out.println(userData.Intro());
         LinkedList<Questions> allQuestions = null;
@@ -48,7 +52,7 @@ public class Game {
 
                 // if user press 'x' exits the game
                 if ("x".equalsIgnoreCase(userAnswer)) {
-                    UserFileHandler.storeUserDataToFile(userData);
+                    userFileHandler.storeUserDataToDatabase(userData);
                     System.out.println("Exiting game... Thank you for playing.");
                     System.exit(0);
 
@@ -92,9 +96,15 @@ public class Game {
                     break;
                 }
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            // storing user data in file
-            UserFileHandler.storeUserDataToFile(userData);
+            try {
+                // storing user data in the database
+                userFileHandler.storeUserDataToDatabase(userData);
+            } catch (SQLException ex) {
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, "An error occurred while storing user data.", ex);
+            }
             // showing end message
             System.out.println(userData.ending());
             // staring game

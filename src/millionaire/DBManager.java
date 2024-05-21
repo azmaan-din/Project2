@@ -20,7 +20,8 @@ public final class DBManager {
 
     private static final String USER_NAME = "Project2";
     private static final String PASSWORD = "Project2";
-    private static final String URL = "jdbc:derby://localhost:1527/Project Data";
+    private static final String URL = "jdbc:derby:UserDB; create=true";
+    
 
     Connection conn;
 

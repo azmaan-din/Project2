@@ -26,7 +26,7 @@ public class Database {
 
     public void userDataTable() {
         String userdataTableSQl = "CREATE TABLE USERDATA ("
-                + "USERID INT PRIMARY KEY, "
+                + "USERID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
                 + "FIRSTNAME VARCHAR(50), "
                 + "LASTNAME VARCHAR(50), "
                 + "AGE INT, "
@@ -35,26 +35,27 @@ public class Database {
         try {
             statement = conn.createStatement();
             statement.executeUpdate(userdataTableSQl);
-            System.out.println("BOOK table created and records inserted.");
+            System.out.println("USERDATA table created");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+        public void leaderboardTable() {
+        String leaderboardTableSQl = "CREATE TABLE EXISTS LEADERBOARD ("
+                + "LEADERBOARDID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
+                + "FIRSTNAME VARCHAR(50), "
+                + "LASTNAME VARCHAR(50), "
+                + "MONEY INT)";
+
+        try {
+            statement = conn.createStatement();
+            statement.executeUpdate(leaderboardTableSQl);
+            System.out.println("Leaderboard table created");
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
-    public void dropTableIfExists(String tableName) {
-        try {
-            if (conn != null && statement != null) {
-                ResultSet rs = conn.getMetaData().getTables(null, null, tableName.toUpperCase(), null);
-                if (rs.next()) {
-                    statement.executeUpdate("DROP TABLE " + tableName);
-                    System.out.println("Table " + tableName + " dropped.");
-                }
-            } else {
-                System.err.println("Failed to drop table: Connection or Statement is null.");
-            }
-        } catch (SQLException e) {
-            System.out.println("DropTableIfExists had an error" + e);
-        }
-    }
 
 }

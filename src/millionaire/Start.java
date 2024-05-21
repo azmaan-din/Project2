@@ -2,6 +2,7 @@ package millionaire;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class Start {
 
     // Method to start the game
-    public static void Start() {
+    public static void Start() throws SQLException {
         // welcoming the user 
         System.out.println("************************************");
         System.out.println("*                                  *");
