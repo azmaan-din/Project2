@@ -57,10 +57,10 @@ public class Panel extends JPanel {
         });
 
         rulesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "RulesDisplay");
-            }
-        });
+    public void actionPerformed(ActionEvent e) {
+        cardLayout.show(mainPanel, "RulesDisplay");
+    }
+});
 
         leaderboardButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -74,13 +74,14 @@ public class Panel extends JPanel {
     }
 });
 
+
     }
 
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
-        button.setForeground(Color.BLUE);  // Set text color to white
-        button.setBackground(new Color(0x007BFF));  // Set button color (Bootstrap Primary)
+        button.setForeground(Color.BLUE);  
+        button.setBackground(new Color(0x007BFF));  
         add(button);
         return button;
     }
@@ -89,7 +90,7 @@ public class Panel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        g.setColor(Color.ORANGE);  // Set text color to white
+        g.setColor(Color.ORANGE);  
         g.drawString("Who Want to be a Millionaire", ((getSize().width - 250) / 2), 30);
     }
 

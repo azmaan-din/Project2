@@ -2,24 +2,51 @@ package millionaire;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.awt.BorderLayout;
-import java.awt.Color;
 
+/**
+ * A JPanel for displaying the game rules.
+ * Author: user
+ */
 public class RulesDisplay extends JPanel {
 
     private JTextArea rulesTextArea;
+    private JButton mainMenuButton;
+    private CardLayout cardLayout;
+    private JPanel mainPanel;
 
-    public RulesDisplay() {
+    public RulesDisplay(CardLayout cardLayout, JPanel mainPanel) {
+        this.cardLayout = cardLayout;
+        this.mainPanel = mainPanel;
+
         setLayout(new BorderLayout());
-        setBackground(Color.BLUE); // Set background color to black
+        setBackground(Color.BLACK); 
 
         rulesTextArea = new JTextArea();
         rulesTextArea.setEditable(false);
-        rulesTextArea.setForeground(Color.RED); // Set text color to white
+        rulesTextArea.setForeground(Color.WHITE); 
+        rulesTextArea.setBackground(Color.BLACK); 
         add(rulesTextArea, BorderLayout.CENTER);
+
+        mainMenuButton = new JButton("Main Menu");
+        mainMenuButton.setForeground(Color.WHITE); 
+        mainMenuButton.setBackground(Color.BLUE); 
+        add(mainMenuButton, BorderLayout.SOUTH);
+
+        mainMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "InitialPanel");
+            }
+        });
 
         loadRules();
     }
