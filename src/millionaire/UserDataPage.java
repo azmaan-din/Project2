@@ -7,9 +7,13 @@ package millionaire;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -38,14 +42,14 @@ public class UserDataPage extends JPanel {
         lastNameTextField.setBounds(200, 150, 150, 30);
         add(lastNameTextField);
 
-        JLabel ageLabel = new JLabel("Enter your last name:");
+        JLabel ageLabel = new JLabel("Enter your age:");
         ageLabel.setBounds(50, 250, 150, 30);
         add(ageLabel);
 
         JTextField ageTextField = new JTextField();
         ageTextField.setBounds(200, 250, 150, 30);
         add(ageTextField);
-        
+
         JButton submitButton = new JButton("Submit");
         submitButton.setBounds(300, 300, 100, 40);
         add(submitButton);
@@ -55,9 +59,23 @@ public class UserDataPage extends JPanel {
                 // Handle submit button click
                 String firstName = firstNameTextField.getText();
                 String lastName = lastNameTextField.getText();
-                String age = ageTextField.getText();
-                System.out.println("User name entered: " + firstName);
-                // You can add more actions here, like navigating to another page
+                int age = 0;
+                try {
+                    age = Integer.parseInt(ageTextField.getText());
+                } catch (NumberFormatException z) {
+
+                    System.out.println("Invalid input: Please enter a valid number.");
+                    JOptionPane.showMessageDialog(null, "Please enter a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                }
+                Player userData = null;
+                userData = new Player(0, firstName, lastName, age, 0);
+                UserFileHandler userFileHandler = new UserFileHandler();
+                try {
+                    userFileHandler.storeUserDataToDatabase(userData);
+                    // You can add more actions here, like navigating to another page
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDataPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
