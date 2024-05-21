@@ -29,12 +29,14 @@ public class WhoWantsToBeAMillionaire {
         UserDataPage userDataPage = new UserDataPage(cardLayout, mainPanel);
         RulesDisplay rulesDisplay = new RulesDisplay(cardLayout, mainPanel);
         FeedbackDisplay feedbackDisplay = new FeedbackDisplay(cardLayout, mainPanel); 
+        GamePanel gamePanel = new GamePanel(cardLayout, mainPanel, null);
         
         
         mainPanel.add(initialPanel, "InitialPanel");
         mainPanel.add(userDataPage, "UserDataPage");
         mainPanel.add(rulesDisplay, "RulesDisplay");  
-        mainPanel.add(feedbackDisplay, "FeedbackDisplay"); 
+        mainPanel.add(feedbackDisplay, "FeedbackDisplay");
+        mainPanel.add(gamePanel, "GamePanel");
 
         
         

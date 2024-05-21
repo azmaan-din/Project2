@@ -22,6 +22,10 @@ public class GamePanel extends JPanel {
     private int prizeMoney;
     private int questCount;
     private int round;
+    private CardLayout cardLayout;
+    private JPanel mainPanel;
+    
+    
 
     private JLabel questionLabel;
     private JButton[] optionButtons;
@@ -33,6 +37,8 @@ public class GamePanel extends JPanel {
         this.questCount = 0;
         this.round = 1;
         this.currentQuestionIndex = 0;
+        this.cardLayout = cardLayout;
+        this.mainPanel = mainPanel;
 
         setLayout(null);
 
@@ -96,7 +102,7 @@ public class GamePanel extends JPanel {
             prizeMoney *= 2;
             moneyLabel.setText("Current Money: $" + userData.getMoney());
             questCount++;
-            if (questCount == 1) {
+            if (questCount == 2) {
                 round++;
                 if (round != 5) {
                     int response = JOptionPane.showConfirmDialog(this, "You have completed round " + (round - 1) + ".\nDo you wish to continue?", "Round Completed", JOptionPane.YES_NO_OPTION);
@@ -123,12 +129,15 @@ public class GamePanel extends JPanel {
 
     private void endGame() {
         UserFileHandler userFileHandler = new UserFileHandler();
+        moneyLabel.setText("Current Money: $" + userData.getMoney());
         try {
             userFileHandler.storeUserDataToDatabase(userData);
             JOptionPane.showMessageDialog(this, "Game over! Your final winnings are: $" + userData.getMoney(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            cardLayout.show(mainPanel, "InitialPanel");
         } catch (SQLException ex) {
             Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, "An error occurred while storing user data.", ex);
         }
+        
     }
 
     private class OptionButtonListener implements ActionListener {
