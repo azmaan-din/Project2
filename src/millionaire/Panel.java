@@ -57,10 +57,10 @@ public class Panel extends JPanel {
         });
 
         rulesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "RulesDisplay");
-            }
-        });
+    public void actionPerformed(ActionEvent e) {
+        cardLayout.show(mainPanel, "RulesDisplay");
+    }
+});
 
         leaderboardButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -69,8 +69,8 @@ public class Panel extends JPanel {
         });
 
         feedbackButton.addActionListener(new ActionListener() {
-    public void actionPerformed(ActionEvent e) {
-        cardLayout.show(mainPanel, "FeedbackDisplay");
+            public void actionPerformed(ActionEvent e) {
+            cardLayout.show(mainPanel, "FeedbackDisplay");
     }
 });
 
