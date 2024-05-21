@@ -28,17 +28,17 @@ public class RulesDisplay extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(new BorderLayout());
-        setBackground(Color.BLACK); // Set background color to black
+        setBackground(Color.BLACK); 
 
         rulesTextArea = new JTextArea();
         rulesTextArea.setEditable(false);
-        rulesTextArea.setForeground(Color.WHITE); // Set text color to white
-        rulesTextArea.setBackground(Color.BLACK); // Set text area background to black
+        rulesTextArea.setForeground(Color.WHITE); 
+        rulesTextArea.setBackground(Color.BLACK); 
         add(rulesTextArea, BorderLayout.CENTER);
 
         mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.setForeground(Color.WHITE); // Set button text color to white
-        mainMenuButton.setBackground(Color.BLUE); // Set button background color to blue
+        mainMenuButton.setForeground(Color.WHITE); 
+        mainMenuButton.setBackground(Color.BLUE); 
         add(mainMenuButton, BorderLayout.SOUTH);
 
         mainMenuButton.addActionListener(new ActionListener() {

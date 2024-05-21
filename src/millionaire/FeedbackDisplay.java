@@ -48,8 +48,8 @@ public class FeedbackDisplay extends JPanel {
                             "Feedback",
                             JOptionPane.INFORMATION_MESSAGE
                         );
-                        feedbackTextArea.setText("");  // Clear the text area after submission
-                        cardLayout.show(mainPanel, "InitialPanel");  // Return to initial panel
+                        feedbackTextArea.setText("");  
+                        cardLayout.show(mainPanel, "InitialPanel");  
                     } catch (IOException ioException) {
                         JOptionPane.showMessageDialog(
                             FeedbackDisplay.this,
