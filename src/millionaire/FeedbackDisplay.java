@@ -27,7 +27,7 @@ public class FeedbackDisplay extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         submitButton = new JButton("Submit Feedback");
-        add(submitButton, BorderLayout.SOUTH);
+        add(submitButton, BorderLayout.NORTH);
 
         submitButton.addActionListener(new ActionListener() {
             @Override
