@@ -9,7 +9,7 @@ import java.util.Scanner;
  *
  * @author Azmaan, Yash
  */
-public class Start {
+public class Start2 {
 
     // Method to start the game
     public static void Start() throws SQLException {

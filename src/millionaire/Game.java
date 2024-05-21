@@ -108,7 +108,7 @@ public class Game {
             // showing end message
             System.out.println(userData.ending());
             // staring game
-            Start.Start();
+            Start2.Start();
 
         }
     }

@@ -6,9 +6,11 @@ package millionaire;
  */
 // Importing IOException class from java.io package
 
+import java.awt.CardLayout;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class WhoWantsToBeAMillionaire {
 
@@ -17,11 +19,24 @@ public class WhoWantsToBeAMillionaire {
         
         JFrame frame = new JFrame("Who Want to be a Millionaire");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Panel panel = new Panel();
-        frame.add(panel);
         frame.setSize(700,700);
-        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
         
+        CardLayout cardLayout = new CardLayout();
+        JPanel mainPanel = new JPanel(cardLayout);
+        
+        Panel initialPanel = new Panel(cardLayout, mainPanel);
+        StartPage startPage = new StartPage(cardLayout, mainPanel);
+        
+        mainPanel.add(initialPanel, "InitialPanel");
+        mainPanel.add(startPage, "StartPage");
+        
+        
+        frame.add(mainPanel);
+        
+        cardLayout.show(mainPanel, "InitialPanel");
+        
+        frame.setVisible(true);
         
 
         
@@ -30,11 +45,7 @@ public class WhoWantsToBeAMillionaire {
         data.userDataTable();
         data.leaderboardTable();
         
-        
-
-
-        // Calling the start method  
-        Start.Start();
+      
     }
 
 }
