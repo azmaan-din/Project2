@@ -69,10 +69,11 @@ public class Panel extends JPanel {
         });
 
         feedbackButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            cardLayout.show(mainPanel, "FeedbackDisplay");
+    public void actionPerformed(ActionEvent e) {
+        cardLayout.show(mainPanel, "FeedbackDisplay");
     }
 });
+
 
     }
 
