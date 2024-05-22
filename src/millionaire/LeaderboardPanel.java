@@ -80,26 +80,37 @@ public class LeaderboardPanel extends JPanel {
         }
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        g.setColor(Color.YELLOW);
-        g.drawString("Leaderboard", ((getSize().width - 75) / 2), 30);
+@Override
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+    g.setColor(Color.YELLOW);
+    g.drawString("Leaderboard", ((getSize().width - 75) / 2), 30);
 
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 16));
-        int yPosition = 100;
-        int rank = 1;
+    g.setFont(new Font("TimesRoman", Font.PLAIN, 16));
+    int yPosition = 100;
+    int rank = 1;
 
-        if (leaderboardData != null) {
-            for (Data userData : leaderboardData) {
-                String entry = rank + ". " + userData.getFirstname() + " " + userData.getLastname() + " - Money: " + userData.getMoney();
-                g.drawString(entry, 50, yPosition);
-                yPosition += 30;
-                rank++;
+    if (leaderboardData != null) {
+        for (Data userData : leaderboardData) {
+            if (rank <= 3) {
+                // Set the color to yellow for the top 3 users' names
+                g.setColor(Color.YELLOW);
+            } else {
+                // Set the color to white for other users' names
+                g.setColor(Color.WHITE);
             }
-        } else {
-            g.drawString("No data available.", 50, yPosition);
+
+            String entry = rank + ". " + userData.getFirstname() + " " + userData.getLastname() + " - Money: " + userData.getMoney();
+            g.drawString(entry, 50, yPosition);
+            yPosition += 30;
+            rank++;
         }
+    } else {
+        g.setColor(Color.WHITE);
+        g.drawString("No data available.", 50, yPosition);
     }
+}
+
+
 }
