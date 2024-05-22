@@ -20,10 +20,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
-/**
- * 
- * @author azmaa
- */
 public class Panel extends JPanel {
 
     private JButton startButton;
@@ -85,7 +81,6 @@ public class Panel extends JPanel {
             }
         });
 
-        
         setBorder(BorderFactory.createLineBorder(new Color(0x0056b3), 3));
     }
 
@@ -97,9 +92,9 @@ public class Panel extends JPanel {
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
 
-        
-        Border lineBorder = BorderFactory.createLineBorder(new Color(0x0056b3), 2);
-        Border emptyBorder = BorderFactory.createEmptyBorder(50, 50, 50, 50);
+        // Increase the border size
+        Border lineBorder = BorderFactory.createLineBorder(new Color(0x0056b3), 4); // Increased from 2 to 4
+        Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10); // Adjusted to 10 from 50
         button.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
 
         button.addMouseListener(new MouseAdapter() {
