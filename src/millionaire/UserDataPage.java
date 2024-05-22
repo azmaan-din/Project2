@@ -109,7 +109,6 @@ public class UserDataPage extends JPanel {
         ));
         return textField;
     }
-
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
@@ -136,4 +135,6 @@ public class UserDataPage extends JPanel {
 
         return button;
     }
+
+
 }
