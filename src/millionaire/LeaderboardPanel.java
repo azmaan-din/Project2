@@ -83,7 +83,7 @@ public class LeaderboardPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        g.setColor(Color.ORANGE);
+        g.setColor(Color.YELLOW);
         g.drawString("Leaderboard", ((getSize().width - 75) / 2), 30);
 
         g.setFont(new Font("TimesRoman", Font.PLAIN, 16));

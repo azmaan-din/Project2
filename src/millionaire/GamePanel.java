@@ -45,7 +45,7 @@ public class GamePanel extends JPanel {
 
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        questionLabel.setForeground(Color.WHITE);
+        questionLabel.setForeground(Color.GREEN);
         questionLabel.setBounds(50, 20, 600, 80);
         add(questionLabel);
 
