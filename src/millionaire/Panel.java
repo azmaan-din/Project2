@@ -11,9 +11,12 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 /**
@@ -35,22 +38,16 @@ public class Panel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
-        setBackground(Color.BLACK); 
+        setBackground(new Color(0x1e1e1e));
 
-        startButton = new JButton("Start");
-        startButton.setBounds(100, 80, 100, 40);
-        add(startButton);
-
-        rulesButton = new JButton("Rules");
-        rulesButton.setBounds(100, 180, 100, 40);
+        startButton = createButton("Start", 100, 80);
+        rulesButton = createButton("Rules", 100, 180);
+        leaderboardButton = createButton("Leaderboard", 100, 280);
+        feedbackButton = createButton("Feedback", 100, 380);
+        
+                add(startButton);
         add(rulesButton);
-
-        leaderboardButton = new JButton("Leaderboard");
-        leaderboardButton.setBounds(100, 280, 100, 40);
         add(leaderboardButton);
-
-        feedbackButton = new JButton("Feedback");
-        feedbackButton.setBounds(100, 380, 100, 40);
         add(feedbackButton);
 
         startButton.addActionListener(new ActionListener() {
@@ -92,9 +89,27 @@ public class Panel extends JPanel {
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
-        button.setForeground(Color.BLUE);  
-        button.setBackground(new Color(0x007BFF));  
-        add(button);
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(0x007BFF));
+        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
+                BorderFactory.createEmptyBorder(5, 15, 5, 15)
+        ));
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(new Color(0x0056b3));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(new Color(0x007BFF));
+            }
+        });
+
         return button;
     }
 

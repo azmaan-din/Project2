@@ -11,10 +11,13 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 /**
@@ -32,9 +35,9 @@ public class LeaderboardPanel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
+        setBackground(new Color(0x1e1e1e));
 
-        JButton backButton = new JButton("Back");
-        backButton.setBounds(20, 20, 80, 30);
+        JButton backButton = createButton("Back", 20, 20);
         add(backButton);
 
         backButton.addActionListener(e -> cardLayout.show(mainPanel, "InitialPanel"));
@@ -45,6 +48,34 @@ public class LeaderboardPanel extends JPanel {
         }
 
     }
+    
+        private JButton createButton(String text, int x, int y) {
+        JButton button = new JButton(text);
+        button.setBounds(x, y, 200, 40);
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(0x007BFF));
+        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
+                BorderFactory.createEmptyBorder(5, 15, 5, 15)
+        ));
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(new Color(0x0056b3));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(new Color(0x007BFF));
+            }
+        });
+
+        return button;
+    }
+    
 
     private void fetchLeaderboardData() throws SQLException {
         UserFileHandler userFileHandler = new UserFileHandler();

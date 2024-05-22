@@ -6,11 +6,15 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.BorderFactory;
 
 /**
  * A JPanel for displaying the game rules.
@@ -28,17 +32,15 @@ public class RulesDisplay extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(new BorderLayout());
-        setBackground(Color.BLACK); 
+        setBackground(new Color(0x1e1e1e)); 
 
         rulesTextArea = new JTextArea();
         rulesTextArea.setEditable(false);
         rulesTextArea.setForeground(Color.WHITE); 
-        rulesTextArea.setBackground(Color.BLACK); 
+        rulesTextArea.setBackground(new Color(0x1e1e1e)); 
         add(rulesTextArea, BorderLayout.CENTER);
 
-        mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.setForeground(Color.WHITE); 
-        mainMenuButton.setBackground(Color.BLUE); 
+        mainMenuButton = createButton("Main Menu");
         add(mainMenuButton, BorderLayout.SOUTH);
 
         mainMenuButton.addActionListener(new ActionListener() {
@@ -49,6 +51,32 @@ public class RulesDisplay extends JPanel {
         });
 
         loadRules();
+    }
+    
+        private JButton createButton(String text) {
+        JButton button = new JButton(text);
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(0x007BFF));
+        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
+                BorderFactory.createEmptyBorder(5, 15, 5, 15)
+        ));
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(new Color(0x0056b3));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(new Color(0x007BFF));
+            }
+        });
+
+        return button;
     }
 
     private void loadRules() {

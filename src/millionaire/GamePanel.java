@@ -1,5 +1,6 @@
 package millionaire;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
+        setBackground(new Color(0x1e1e1e));
 
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
