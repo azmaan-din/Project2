@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 
 public class GamePanel extends JPanel {
 
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel {
 
         setLayout(null);
         setBackground(new Color(0x17191a)); // Set background color to #17191a
+        setBorder(BorderFactory.createLineBorder(Color.GREEN, 2)); // Set green border
 
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("Arial", Font.BOLD, 24));

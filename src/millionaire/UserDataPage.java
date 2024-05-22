@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package millionaire;
 
 import java.awt.CardLayout;
@@ -16,22 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
- * @author azmaa
+ * UserDataPage class for entering user details.
  */
 public class UserDataPage extends JPanel {
     private JButton submitButton;
     private JButton backButton;
 
     public UserDataPage(CardLayout cardLayout, JPanel mainPanel) {
-
         setLayout(null);
         setBackground(new Color(0x1e1e1e));
 
@@ -61,6 +54,7 @@ public class UserDataPage extends JPanel {
 
         submitButton = createButton("Submit", 300, 300);
         add(submitButton);
+
         backButton = createButton("Back", 0, 0);
         add(backButton);
 
@@ -75,6 +69,7 @@ public class UserDataPage extends JPanel {
                 } catch (NumberFormatException z) {
                     System.out.println("Invalid input: Please enter a valid number.");
                     JOptionPane.showMessageDialog(null, "Please enter a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
                 Player userData = new Player(0, firstName, lastName, age, 0);
                 UserFileHandler userFileHandler = new UserFileHandler();
@@ -104,11 +99,12 @@ public class UserDataPage extends JPanel {
         textField.setForeground(Color.GREEN);
         textField.setFont(new Font("Arial", Font.PLAIN, 14));
         textField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
+                BorderFactory.createLineBorder(Color.GREEN, 1),  // Green border
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)
         ));
         return textField;
     }
+
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
@@ -117,7 +113,7 @@ public class UserDataPage extends JPanel {
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
+                BorderFactory.createLineBorder(Color.GREEN, 1),  // Green border
                 BorderFactory.createEmptyBorder(5, 15, 5, 15)
         ));
 
@@ -135,6 +131,4 @@ public class UserDataPage extends JPanel {
 
         return button;
     }
-
-
 }

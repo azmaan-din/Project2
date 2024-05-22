@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package millionaire;
 
 import java.awt.CardLayout;
@@ -81,7 +77,7 @@ public class Panel extends JPanel {
             }
         });
 
-        setBorder(BorderFactory.createLineBorder(new Color(0x0056b3), 3));
+        setBorder(BorderFactory.createLineBorder(Color.GREEN, 3)); // Set green border
     }
 
     private JButton createButton(String text, int x, int y) {
@@ -92,9 +88,9 @@ public class Panel extends JPanel {
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
 
-        // Increase the border size
-        Border lineBorder = BorderFactory.createLineBorder(new Color(0x0056b3), 4); // Increased from 2 to 4
-        Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10); // Adjusted to 10 from 50
+        // Set green border
+        Border lineBorder = BorderFactory.createLineBorder(Color.GREEN, 4); // Green border, size 4
+        Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10); // Empty border size 10
         button.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
 
         button.addMouseListener(new MouseAdapter() {

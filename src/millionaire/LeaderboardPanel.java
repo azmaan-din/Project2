@@ -29,6 +29,7 @@ public class LeaderboardPanel extends JPanel {
 
         setLayout(null);
         setBackground(new Color(0x17191a)); // Set background color to #17191a
+        setBorder(BorderFactory.createLineBorder(Color.GREEN, 2)); // Set green border
 
         JButton backButton = createButton("Back", 20, 20);
         add(backButton);
@@ -46,7 +47,7 @@ public class LeaderboardPanel extends JPanel {
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
+                BorderFactory.createLineBorder(Color.GREEN, 2), // Set green border
                 BorderFactory.createEmptyBorder(5, 15, 5, 15)
         ));
 
