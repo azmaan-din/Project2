@@ -33,14 +33,6 @@ public class Leaderboard {
                 for (Data userData : allUserData) {
                     userFileHandler.insertLeaderboardData(userData);
                 }
-
-                // Print the leaderboard
-                System.out.println("Leaderboard:");
-                int rank = 1;
-                for (Data userData : allUserData) {
-                    System.out.println(rank + ". " + userData.getFirstname() + " " + userData.getLastname() + " - Money: " + userData.getMoney());
-                    rank++;
-                }
             }
         } catch (SQLException e) {
             System.err.println("An error occurred while accessing the database: " + e.getMessage());

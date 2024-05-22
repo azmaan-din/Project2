@@ -42,14 +42,11 @@ public class LeaderboardPanel extends JPanel {
 
         backButton.addActionListener(e -> cardLayout.show(mainPanel, "InitialPanel"));
 
-        try {
-            fetchLeaderboardData();
-        } catch (SQLException e) {
-        }
+        refreshLeaderboard();
 
     }
-    
-        private JButton createButton(String text, int x, int y) {
+
+    private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
         button.setForeground(Color.WHITE);
@@ -75,14 +72,13 @@ public class LeaderboardPanel extends JPanel {
 
         return button;
     }
-    
 
     private void fetchLeaderboardData() throws SQLException {
         UserFileHandler userFileHandler = new UserFileHandler();
         leaderboardData = userFileHandler.getLeaderboardData();
     }
-    
-        public void refreshLeaderboard() {
+
+    public void refreshLeaderboard() {
         try {
             fetchLeaderboardData();
             repaint();
