@@ -85,7 +85,7 @@ public class Panel extends JPanel {
             }
         });
 
-        // Add border around the panel
+        
         setBorder(BorderFactory.createLineBorder(new Color(0x0056b3), 3));
     }
 
@@ -97,7 +97,7 @@ public class Panel extends JPanel {
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
 
-        // Add custom border to the button
+        
         Border lineBorder = BorderFactory.createLineBorder(new Color(0x0056b3), 2);
         Border emptyBorder = BorderFactory.createEmptyBorder(50, 50, 50, 50);
         button.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));

@@ -113,10 +113,7 @@ public class UserDataPage extends JPanel {
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
-        button.setForeground(Color.WHITE);
-        button.setBackground(new Color(0x007BFF));
-        button.setFont(new Font("Arial", Font.BOLD, 16));
-        button.setFocusPainted(false);
+        
         button.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(0x0056b3), 1),
                 BorderFactory.createEmptyBorder(5, 15, 5, 15)
@@ -124,9 +121,7 @@ public class UserDataPage extends JPanel {
 
         button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-                button.setBackground(new Color(0x0056b3));
-            }
+            
 
             @Override
             public void mouseExited(MouseEvent e) {
