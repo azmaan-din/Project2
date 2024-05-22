@@ -81,6 +81,15 @@ public class LeaderboardPanel extends JPanel {
         UserFileHandler userFileHandler = new UserFileHandler();
         leaderboardData = userFileHandler.getLeaderboardData();
     }
+    
+        public void refreshLeaderboard() {
+        try {
+            fetchLeaderboardData();
+            repaint();
+        } catch (SQLException e) {
+            Logger.getLogger(LeaderboardPanel.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

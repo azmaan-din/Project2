@@ -161,7 +161,8 @@ public class GamePanel extends JPanel {
             userFileHandler.storeUserDataToDatabase(userData);
             JOptionPane.showMessageDialog(this, "Game over! Your final winnings are: $" + userData.getMoney(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
             cardLayout.show(mainPanel, "InitialPanel");
-            Leaderboard.displayLeaderboard();
+            LeaderboardPanel leaderboardPanel = (LeaderboardPanel) mainPanel.getComponent(mainPanel.getComponentZOrder(this) - 1);
+            leaderboardPanel.refreshLeaderboard();
         } catch (SQLException ex) {
             Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, "An error occurred while storing user data.", ex);
         }
