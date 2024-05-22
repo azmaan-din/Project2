@@ -1,4 +1,5 @@
 package millionaire;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -15,7 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
-
 public class GamePanel extends JPanel {
 
     private Player userData;
@@ -26,7 +26,7 @@ public class GamePanel extends JPanel {
     private int round;
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    
+
     private JLabel questionLabel;
     private JButton[] optionButtons;
     private JLabel moneyLabel;
@@ -41,7 +41,7 @@ public class GamePanel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
-        setBackground(new Color(0x1e1e1e)); 
+        setBackground(new Color(0x17191a)); // Set background color to #17191a
 
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("Arial", Font.BOLD, 24));

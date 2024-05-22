@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package millionaire;
 
 import java.awt.CardLayout;
@@ -9,8 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JPanel;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -21,8 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 /**
- *
- * @author azmaa
+ * LeaderboardPanel class for displaying the leaderboard.
  */
 public class LeaderboardPanel extends JPanel {
 
@@ -35,7 +28,7 @@ public class LeaderboardPanel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
-        setBackground(new Color(0x1e1e1e));
+        setBackground(new Color(0x17191a)); // Set background color to #17191a
 
         JButton backButton = createButton("Back", 20, 20);
         add(backButton);
@@ -43,7 +36,6 @@ public class LeaderboardPanel extends JPanel {
         backButton.addActionListener(e -> cardLayout.show(mainPanel, "InitialPanel"));
 
         refreshLeaderboard();
-
     }
 
     private JButton createButton(String text, int x, int y) {
