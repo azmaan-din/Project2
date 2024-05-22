@@ -59,7 +59,7 @@ public class GamePanel extends JPanel {
 
         moneyLabel = new JLabel("Current Money: $0");
         moneyLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        moneyLabel.setForeground(Color.WHITE);
+        moneyLabel.setForeground(Color.GREEN);
         moneyLabel.setBounds(50, 350, 600, 30);
         add(moneyLabel);
 
@@ -72,7 +72,7 @@ public class GamePanel extends JPanel {
 
     private JButton createButton() {
         JButton button = new JButton();
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.GREEN);
         button.setBackground(new Color(0x007BFF));
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);

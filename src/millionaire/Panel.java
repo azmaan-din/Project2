@@ -87,7 +87,7 @@ public class Panel extends JPanel {
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.GREEN);
         button.setBackground(new Color(0x007BFF));
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);

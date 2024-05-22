@@ -37,7 +37,7 @@ public class UserDataPage extends JPanel {
 
         JLabel firstNameLabel = new JLabel("Enter your first name:");
         firstNameLabel.setBounds(50, 50, 150, 30);
-        firstNameLabel.setForeground(Color.WHITE);
+        firstNameLabel.setForeground(Color.GREEN);
         add(firstNameLabel);
 
         JTextField firstNameTextField = createTextField(200, 50);
@@ -45,7 +45,7 @@ public class UserDataPage extends JPanel {
 
         JLabel lastNameLabel = new JLabel("Enter your last name:");
         lastNameLabel.setBounds(50, 150, 150, 30);
-        lastNameLabel.setForeground(Color.WHITE);
+        lastNameLabel.setForeground(Color.GREEN);
         add(lastNameLabel);
 
         JTextField lastNameTextField = createTextField(200, 150);
@@ -53,7 +53,7 @@ public class UserDataPage extends JPanel {
 
         JLabel ageLabel = new JLabel("Enter your age:");
         ageLabel.setBounds(50, 250, 150, 30);
-        ageLabel.setForeground(Color.WHITE);
+        ageLabel.setForeground(Color.GREEN);
         add(ageLabel);
 
         JTextField ageTextField = createTextField(200, 250);
@@ -101,7 +101,7 @@ public class UserDataPage extends JPanel {
         JTextField textField = new JTextField();
         textField.setBounds(x, y, 200, 30);
         textField.setBackground(new Color(0x282828));
-        textField.setForeground(Color.WHITE);
+        textField.setForeground(Color.GREEN);
         textField.setFont(new Font("Arial", Font.PLAIN, 14));
         textField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(0x0056b3), 1),
@@ -113,7 +113,7 @@ public class UserDataPage extends JPanel {
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.GREEN);
         button.setBackground(new Color(0x007BFF));
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
