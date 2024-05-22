@@ -52,6 +52,9 @@ public class WhoWantsToBeAMillionaire {
         //calls create table 
         data.userDataTable();
         data.leaderboardTable();
+        data.viewTableData("USERDATA");
+        data.viewTableData("LEADERBOARD");
+        
         
       
     }

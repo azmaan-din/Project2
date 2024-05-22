@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 
 /**
@@ -64,7 +67,15 @@ public class Panel extends JPanel {
 
         leaderboardButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Database data = new Database();
                 System.out.println("leaderboard was clicked");
+                try {
+                    Leaderboard.displayLeaderboard();
+                    Leaderboard.printLeaderboard();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         });
 

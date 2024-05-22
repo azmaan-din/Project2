@@ -40,13 +40,15 @@ public class Database {
             System.out.println(e);
         }
     }
-    
-        public void leaderboardTable() {
+
+    public void leaderboardTable() {
         String leaderboardTableSQl = "CREATE TABLE LEADERBOARD ("
                 + "LEADERBOARDID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
+                + "USERID INT, "
                 + "FIRSTNAME VARCHAR(50), "
                 + "LASTNAME VARCHAR(50), "
-                + "MONEY INT)";
+                + "MONEY INT, "
+                + "FOREIGN KEY (USERID) REFERENCES USERDATA(USERID))";
 
         try {
             statement = conn.createStatement();
@@ -57,5 +59,24 @@ public class Database {
         }
     }
 
+    public void viewTableData(String tableName) {
+        String query = "SELECT * FROM " + tableName;
+        try {
+            statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+
+            int columnCount = rs.getMetaData().getColumnCount();
+            System.out.println("Data in " + tableName + " table:");
+
+            while (rs.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    System.out.print(rs.getString(i) + "\t");
+                }
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
 }

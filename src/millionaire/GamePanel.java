@@ -134,13 +134,16 @@ public class GamePanel extends JPanel {
             userFileHandler.storeUserDataToDatabase(userData);
             JOptionPane.showMessageDialog(this, "Game over! Your final winnings are: $" + userData.getMoney(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
             cardLayout.show(mainPanel, "InitialPanel");
+            Leaderboard.displayLeaderboard();
         } catch (SQLException ex) {
             Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, "An error occurred while storing user data.", ex);
         }
         
     }
+    /* If an oprion is clicked then grabs the first character of the string and send it to check answer */
 
     private class OptionButtonListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             JButton source = (JButton) e.getSource();
             String userAnswer = source.getText();
