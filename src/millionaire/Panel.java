@@ -68,7 +68,6 @@ public class Panel extends JPanel {
                 System.out.println("leaderboard was clicked");
                 try {
                     Leaderboard.displayLeaderboard();
-                    Leaderboard.printLeaderboard();
                 } catch (SQLException ex) {
                     Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
                 }

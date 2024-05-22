@@ -46,16 +46,5 @@ public class Leaderboard {
             System.err.println("An error occurred while accessing the database: " + e.getMessage());
         }
     }
-        public static void printLeaderboard() throws SQLException {
-        UserFileHandler userFileHandler = new UserFileHandler();
-        List<Data> leaderboardData = userFileHandler.getLeaderboardData();
-
-        System.out.println("Leaderboard from LEADERBOARD table:");
-        int rank = 1;
-        for (Data userData : leaderboardData) {
-            System.out.println(rank + ". " + userData.getFirstname() + " " + userData.getLastname() + " - Money: " + userData.getMoney());
-            rank++;
-        }
-    }
 }
 
