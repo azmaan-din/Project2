@@ -36,7 +36,7 @@ public class RulesDisplay extends JPanel {
 
         rulesTextArea = new JTextArea();
         rulesTextArea.setEditable(false);
-        rulesTextArea.setForeground(Color.WHITE); 
+        rulesTextArea.setForeground(Color.GREEN); 
         rulesTextArea.setBackground(new Color(0x1e1e1e)); 
         add(rulesTextArea, BorderLayout.CENTER);
 
@@ -55,7 +55,7 @@ public class RulesDisplay extends JPanel {
     
         private JButton createButton(String text) {
         JButton button = new JButton(text);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.GREEN);
         button.setBackground(new Color(0x007BFF));
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
