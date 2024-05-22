@@ -75,6 +75,7 @@ public class Panel extends JPanel {
                 } catch (SQLException ex) {
                     Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                cardLayout.show(mainPanel, "LeaderboardPanel");
 
             }
         });

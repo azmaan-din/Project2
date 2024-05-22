@@ -30,6 +30,7 @@ public class WhoWantsToBeAMillionaire {
         RulesDisplay rulesDisplay = new RulesDisplay(cardLayout, mainPanel);
         FeedbackDisplay feedbackDisplay = new FeedbackDisplay(cardLayout, mainPanel); 
         GamePanel gamePanel = new GamePanel(cardLayout, mainPanel, null);
+        LeaderboardPanel leaderboardPanel = new LeaderboardPanel(cardLayout, mainPanel);
         
         
         mainPanel.add(initialPanel, "InitialPanel");
@@ -37,6 +38,7 @@ public class WhoWantsToBeAMillionaire {
         mainPanel.add(rulesDisplay, "RulesDisplay");  
         mainPanel.add(feedbackDisplay, "FeedbackDisplay");
         mainPanel.add(gamePanel, "GamePanel");
+        mainPanel.add(leaderboardPanel, "LeaderboardPanel");
 
         
         
