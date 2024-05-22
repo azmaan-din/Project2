@@ -45,7 +45,7 @@ public class Panel extends JPanel {
         leaderboardButton = createButton("Leaderboard", 100, 280);
         feedbackButton = createButton("Feedback", 100, 380);
         
-                add(startButton);
+        add(startButton);
         add(rulesButton);
         add(leaderboardButton);
         add(feedbackButton);
