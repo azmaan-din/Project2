@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,8 +27,6 @@ public class GamePanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     
-    
-
     private JLabel questionLabel;
     private JButton[] optionButtons;
     private JLabel moneyLabel;
@@ -42,24 +41,26 @@ public class GamePanel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
-        setBackground(new Color(0x1e1e1e));
+        setBackground(new Color(0x1e1e1e)); // Darker background for better readability
 
         questionLabel = new JLabel();
-        questionLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        questionLabel.setBounds(50, 50, 600, 30);
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        questionLabel.setForeground(Color.WHITE);
+        questionLabel.setBounds(50, 20, 600, 80);
         add(questionLabel);
 
         optionButtons = new JButton[4];
         for (int i = 0; i < optionButtons.length; i++) {
-            optionButtons[i] = new JButton();
-            optionButtons[i].setBounds(50, 100 + (i * 50), 600, 30);
+            optionButtons[i] = createButton();
+            optionButtons[i].setBounds(50, 100 + (i * 50), 600, 40);
             optionButtons[i].addActionListener(new OptionButtonListener());
             add(optionButtons[i]);
         }
 
         moneyLabel = new JLabel("Current Money: $0");
-        moneyLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        moneyLabel.setBounds(50, 300, 600, 30);
+        moneyLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        moneyLabel.setForeground(Color.WHITE);
+        moneyLabel.setBounds(50, 350, 600, 30);
         add(moneyLabel);
 
         loadQuestions();
@@ -67,6 +68,32 @@ public class GamePanel extends JPanel {
         if (!allQuestions.isEmpty()) {
             displayQuestion();
         }
+    }
+
+    private JButton createButton() {
+        JButton button = new JButton();
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(0x007BFF));
+        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
+                BorderFactory.createEmptyBorder(5, 15, 5, 15)
+        ));
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(0x0056b3));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(0x007BFF));
+            }
+        });
+
+        return button;
     }
 
     private void loadQuestions() {
@@ -81,7 +108,7 @@ public class GamePanel extends JPanel {
     private void displayQuestion() {
         if (currentQuestionIndex < allQuestions.size()) {
             Questions question = allQuestions.get(currentQuestionIndex);
-            questionLabel.setText(question.getQuestion());
+            questionLabel.setText("<html>" + question.getQuestion() + "</html>");
             LinkedList<String> options = question.getOptions();
             for (int i = 0; i < options.size(); i++) {
                 optionButtons[i].setText(options.get(i));
@@ -97,9 +124,7 @@ public class GamePanel extends JPanel {
 
     private void checkAnswer(String userAnswer) {
         Questions question = allQuestions.get(currentQuestionIndex);
-        System.out.println(question.getAnswer());
         if (question.getAnswer().equalsIgnoreCase(userAnswer)) {
-            
             userData.updateMoney(prizeMoney);
             prizeMoney *= 2;
             moneyLabel.setText("Current Money: $" + userData.getMoney());
@@ -140,9 +165,7 @@ public class GamePanel extends JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, "An error occurred while storing user data.", ex);
         }
-        
     }
-    /* If an oprion is clicked then grabs the first character of the string and send it to check answer */
 
     private class OptionButtonListener implements ActionListener {
         @Override
@@ -150,7 +173,7 @@ public class GamePanel extends JPanel {
             JButton source = (JButton) e.getSource();
             String userAnswer = source.getText();
             char firstChar = userAnswer.charAt(0);
-            String firstCharString = Character.toString(firstChar);            
+            String firstCharString = Character.toString(firstChar);
             checkAnswer(firstCharString);
         }
     }
