@@ -18,9 +18,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.border.Border;
 
 /**
- *
+ * 
  * @author azmaa
  */
 public class Panel extends JPanel {
@@ -40,16 +41,19 @@ public class Panel extends JPanel {
         setLayout(null);
         setBackground(new Color(0x1e1e1e));
 
+        // Create buttons
         startButton = createButton("Start", 100, 80);
         rulesButton = createButton("Rules", 100, 180);
         leaderboardButton = createButton("Leaderboard", 100, 280);
         feedbackButton = createButton("Feedback", 100, 380);
-        
+
+        // Add buttons to the panel
         add(startButton);
         add(rulesButton);
         add(leaderboardButton);
         add(feedbackButton);
 
+        // Add action listeners
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "UserDataPage");
@@ -57,10 +61,10 @@ public class Panel extends JPanel {
         });
 
         rulesButton.addActionListener(new ActionListener() {
-    public void actionPerformed(ActionEvent e) {
-        cardLayout.show(mainPanel, "RulesDisplay");
-    }
-});
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "RulesDisplay");
+            }
+        });
 
         leaderboardButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -72,17 +76,17 @@ public class Panel extends JPanel {
                     Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 cardLayout.show(mainPanel, "LeaderboardPanel");
-
             }
         });
 
         feedbackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            cardLayout.show(mainPanel, "FeedbackDisplay");
-    }
-});
+                cardLayout.show(mainPanel, "FeedbackDisplay");
+            }
+        });
 
-
+        // Add border around the panel
+        setBorder(BorderFactory.createLineBorder(new Color(0x0056b3), 3));
     }
 
     private JButton createButton(String text, int x, int y) {
@@ -92,10 +96,11 @@ public class Panel extends JPanel {
         button.setBackground(new Color(0x007BFF));
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
-                BorderFactory.createEmptyBorder(5, 15, 5, 15)
-        ));
+
+        // Add custom border to the button
+        Border lineBorder = BorderFactory.createLineBorder(new Color(0x0056b3), 2);
+        Border emptyBorder = BorderFactory.createEmptyBorder(50, 50, 50, 50);
+        button.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
 
         button.addMouseListener(new MouseAdapter() {
             @Override
@@ -116,8 +121,7 @@ public class Panel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        g.setColor(Color.ORANGE);  
-        g.drawString("Who Want to be a Millionaire", ((getSize().width - 250) / 2), 30);
+        g.setColor(Color.ORANGE);
+        g.drawString("Who Wants to be a Millionaire", ((getSize().width - 250) / 2), 30);
     }
-
 }
