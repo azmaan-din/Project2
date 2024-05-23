@@ -52,14 +52,7 @@ public class Panel extends JPanel {
         add(feedbackButton);
 
         // Load and add image to the panel
-        try {
-            ImageIcon icon = new ImageIcon(ImageIO.read(getClass().getResource("./YA.jpg")));
-            imageLabel = new JLabel(icon);
-            imageLabel.setBounds(200, 100, icon.getIconWidth(), icon.getIconHeight());
-            add(imageLabel);
-        } catch (IOException ex) {
-            Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
 
         // Add action listeners
         startButton.addActionListener(new ActionListener() {
