@@ -48,17 +48,10 @@ public class GamePanel extends JPanel {
         questionLabel.setBounds(50, 20, 600, 80);
         add(questionLabel);
 
-        // Load the image and add it to the center of the panel
-        
-
         optionButtons = new JButton[4];
         for (int i = 0; i < optionButtons.length; i++) {
             optionButtons[i] = createButton();
-            if (i < 2) {
-                optionButtons[i].setBounds(50, 350 + (i * 50), 200, 40); // Buttons on the left side
-            } else {
-                optionButtons[i].setBounds(450, 350 + ((i - 2) * 50), 200, 40); // Buttons on the right side
-            }
+            optionButtons[i].setBounds(50, 100 + (i * 50), 600, 40);
             optionButtons[i].addActionListener(new OptionButtonListener());
             add(optionButtons[i]);
         }
@@ -66,13 +59,13 @@ public class GamePanel extends JPanel {
         moneyLabel = new JLabel("Current Money: $0");
         moneyLabel.setFont(new Font("Arial", Font.BOLD, 20));
         moneyLabel.setForeground(Color.GREEN);
-        moneyLabel.setBounds(50, 300, 600, 30);
+        moneyLabel.setBounds(50, 350, 600, 30);
         add(moneyLabel);
 
         // Initialize circles panel and buttons
         circlePanel = new JPanel();
         circlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Adjust spacing as needed
-        circlePanel.setBounds(50, 500, 600, 50); // Adjust position and size as needed
+        circlePanel.setBounds(50, 400, 600, 50); // Adjust position and size as needed
         circlePanel.setOpaque(false); // Make the panel transparent
         add(circlePanel);
 
@@ -154,43 +147,44 @@ public class GamePanel extends JPanel {
     }
 
     private void checkAnswer(String userAnswer) {
-        Questions question = allQuestions.get(currentQuestionIndex);
-        if (question.getAnswer().equalsIgnoreCase(userAnswer)) {
-            userData.updateMoney(prizeMoney);
-            prizeMoney *= 2;
-            moneyLabel.setText("Current Money: $" + userData.getMoney());
-            questCount++;
-            if (questCount == 2) {
-                round++;
-                if (round != 5) {
-                    int response = JOptionPane.showConfirmDialog(this, "You have completed round " + (round - 1) + ".\nDo you wish to continue?", "Round Completed", JOptionPane.YES_NO_OPTION);
-                    if (response == JOptionPane.NO_OPTION) {
-                        endGame();
-                        return;
-                    } else {
-                        questCount = 0;
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "You finished all rounds!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+    Questions question = allQuestions.get(currentQuestionIndex);
+    if (question.getAnswer().equalsIgnoreCase(userAnswer)) {
+        userData.updateMoney(prizeMoney);
+        prizeMoney *= 2;
+        moneyLabel.setText("Current Money: $" + userData.getMoney());
+        questCount++;
+        if (questCount == 2) {
+            round++;
+            if (round != 5) {
+                int response = JOptionPane.showConfirmDialog(this, "You have completed round " + (round - 1) + ".\nDo you wish to continue?", "Round Completed", JOptionPane.YES_NO_OPTION);
+                if (response == JOptionPane.NO_OPTION) {
                     endGame();
                     return;
+                } else {
+                    questCount = 0;
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "You finished all rounds!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                endGame();
+                return;
             }
-            currentQuestionIndex++;
-            displayQuestion();
-        } else {
-            JOptionPane.showMessageDialog(this, "Incorrect answer!", "Game Over", JOptionPane.ERROR_MESSAGE);
-            userData.setMoney(0);
-            endGame();
-
-            // Set the color of the current circle to red
-            circleButtons[circlesCompleted].setBackground(Color.RED);
         }
-
-        // Increment circlesCompleted and update circle color
-        circlesCompleted++;
-        circleButtons[circlesCompleted - 1].setBackground(Color.GREEN);
+        currentQuestionIndex++;
+        displayQuestion();
+    } else {
+        JOptionPane.showMessageDialog(this, "Incorrect answer!", "Game Over", JOptionPane.ERROR_MESSAGE);
+        userData.setMoney(0);
+        endGame();
+        
+        // Set the color of the current circle to red
+        circleButtons[circlesCompleted].setBackground(Color.RED);
     }
+
+    // Increment circlesCompleted and update circle color
+    circlesCompleted++;
+    circleButtons[circlesCompleted - 1].setBackground(Color.GREEN);
+}
+
 
     private void endGame() {
         UserFileHandler userFileHandler = new UserFileHandler();
