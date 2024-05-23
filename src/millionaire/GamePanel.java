@@ -49,10 +49,7 @@ public class GamePanel extends JPanel {
         add(questionLabel);
 
         // Load the image and add it to the center of the panel
-        ImageIcon icon = new ImageIcon(getClass().getResource("./YA.jpg")); // Adjust the path as needed
-        JLabel imageLabel = new JLabel(icon);
-        imageLabel.setBounds(200, 100, 400, 200); // Adjust the position and size as needed
-        add(imageLabel);
+        
 
         optionButtons = new JButton[4];
         for (int i = 0; i < optionButtons.length; i++) {
