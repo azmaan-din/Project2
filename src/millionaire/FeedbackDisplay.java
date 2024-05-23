@@ -37,7 +37,7 @@ public class FeedbackDisplay extends JPanel {
 
         feedbackTextArea = new JTextArea(10, 30);
         feedbackTextArea.setBackground(new Color(0x1e1e1e));
-        feedbackTextArea.setForeground(Color.WHITE);
+        feedbackTextArea.setForeground(Color.GREEN);
         JScrollPane scrollPane = new JScrollPane(feedbackTextArea);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -91,7 +91,7 @@ public class FeedbackDisplay extends JPanel {
     }
         private JButton createButton(String text) {
         JButton button = new JButton(text);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.GREEN);
         button.setBackground(new Color(0x007BFF));
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
