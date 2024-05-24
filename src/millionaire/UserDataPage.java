@@ -12,19 +12,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * UserDataPage class for entering user details.
+ *
+ * @author azmaa
  */
 public class UserDataPage extends JPanel {
     private JButton submitButton;
     private JButton backButton;
 
     public UserDataPage(CardLayout cardLayout, JPanel mainPanel) {
+
         setLayout(null);
         setBackground(new Color(0x1e1e1e));
 
@@ -54,36 +57,39 @@ public class UserDataPage extends JPanel {
 
         submitButton = createButton("Submit", 300, 300);
         add(submitButton);
-
         backButton = createButton("Back", 0, 0);
         add(backButton);
 
         submitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Handle submit button click
-                String firstName = firstNameTextField.getText();
-                String lastName = lastNameTextField.getText();
-                int age = 0;
-                try {
-                    age = Integer.parseInt(ageTextField.getText());
-                } catch (NumberFormatException z) {
-                    System.out.println("Invalid input: Please enter a valid number.");
-                    JOptionPane.showMessageDialog(null, "Please enter a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                Player userData = new Player(0, firstName, lastName, age, 0);
-                UserFileHandler userFileHandler = new UserFileHandler();
-                try {
-                    userFileHandler.storeUserDataToDatabase(userData);
-                    GamePanel gamePanel = new GamePanel(cardLayout, mainPanel, userData);
-                    mainPanel.add(gamePanel, "GamePanel");
-                    cardLayout.show(mainPanel, "GamePanel");
-                } catch (SQLException ex) {
-                    System.out.println("error in User Data Page");
-                    Logger.getLogger(UserDataPage.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+    public void actionPerformed(ActionEvent e) {
+        // Handle submit button click
+        String firstName = firstNameTextField.getText();
+        String lastName = lastNameTextField.getText();
+        int age = 0;
+        try {
+            age = Integer.parseInt(ageTextField.getText());
+        } catch (NumberFormatException z) {
+            System.out.println("Invalid input: Please enter a valid number.");
+            JOptionPane.showMessageDialog(null, "Please enter a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }
+        Player userData = new Player(0, firstName, lastName, age, 0);
+        UserFileHandler userFileHandler = new UserFileHandler();
+        try {
+            userFileHandler.storeUserDataToDatabase(userData);
+            // Clear text fields
+            firstNameTextField.setText("");
+            lastNameTextField.setText("");
+            ageTextField.setText("");
+            GamePanel gamePanel = new GamePanel(cardLayout, mainPanel, userData);
+            mainPanel.add(gamePanel, "GamePanel");
+            cardLayout.show(mainPanel, "GamePanel");
+        } catch (SQLException ex) {
+            System.out.println("error in User Data Page");
+            Logger.getLogger(UserDataPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+});
+
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -99,12 +105,11 @@ public class UserDataPage extends JPanel {
         textField.setForeground(Color.GREEN);
         textField.setFont(new Font("Arial", Font.PLAIN, 14));
         textField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GREEN, 1),  // Green border
+                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)
         ));
         return textField;
     }
-
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
@@ -113,7 +118,7 @@ public class UserDataPage extends JPanel {
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GREEN, 1),  // Green border
+                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
                 BorderFactory.createEmptyBorder(5, 15, 5, 15)
         ));
 
@@ -131,4 +136,6 @@ public class UserDataPage extends JPanel {
 
         return button;
     }
+
+
 }

@@ -1,4 +1,5 @@
 package millionaire;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -12,9 +13,8 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JOptionPane;
-
+import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
 
@@ -26,10 +26,11 @@ public class GamePanel extends JPanel {
     private int round;
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    
+
     private JLabel questionLabel;
     private JButton[] optionButtons;
     private JLabel moneyLabel;
+    private SquarePanel squarePanel;
 
     public GamePanel(CardLayout cardLayout, JPanel mainPanel, Player userData) {
         this.userData = userData;
@@ -41,7 +42,7 @@ public class GamePanel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
-        setBackground(new Color(0x1e1e1e)); 
+        setBackground(new Color(0x1e1e1e));
 
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("Arial", Font.BOLD, 24));
@@ -62,6 +63,10 @@ public class GamePanel extends JPanel {
         moneyLabel.setForeground(Color.WHITE);
         moneyLabel.setBounds(50, 350, 600, 30);
         add(moneyLabel);
+
+        squarePanel = new SquarePanel();
+        squarePanel.setBounds(50, 400, 300, 50);
+        add(squarePanel);
 
         loadQuestions();
 
@@ -122,37 +127,43 @@ public class GamePanel extends JPanel {
         }
     }
 
-    private void checkAnswer(String userAnswer) {
-        Questions question = allQuestions.get(currentQuestionIndex);
-        if (question.getAnswer().equalsIgnoreCase(userAnswer)) {
-            userData.updateMoney(prizeMoney);
-            prizeMoney *= 2;
-            moneyLabel.setText("Current Money: $" + userData.getMoney());
-            questCount++;
-            if (questCount == 2) {
-                round++;
-                if (round != 5) {
-                    int response = JOptionPane.showConfirmDialog(this, "You have completed round " + (round - 1) + ".\nDo you wish to continue?", "Round Completed", JOptionPane.YES_NO_OPTION);
-                    if (response == JOptionPane.NO_OPTION) {
-                        endGame();
-                        return;
-                    } else {
-                        questCount = 0;
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "You finished all rounds!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                    endGame();
-                    return;
-                }
+private void checkAnswer(String userAnswer) {
+    Questions question = allQuestions.get(currentQuestionIndex);
+    if (question.getAnswer().equalsIgnoreCase(userAnswer)) {
+        userData.updateMoney(prizeMoney);
+        prizeMoney *= 2;
+        moneyLabel.setText("Current Money: $" + userData.getMoney());
+        squarePanel.fillSquare(questCount, true);
+    } else {
+        JOptionPane.showMessageDialog(this, "Incorrect answer!", "Game Over", JOptionPane.ERROR_MESSAGE);
+        userData.setMoney(0);
+        squarePanel.fillSquare(questCount, false);
+        endGame();
+        return;
+    }
+    
+    questCount++;
+    if (questCount == 8) { // Adjusted condition for round completion
+        round++;
+        if (round != 5) {
+            int response = JOptionPane.showConfirmDialog(this, "You have completed round " + (round - 1) + ".\nDo you wish to continue?", "Round Completed", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.NO_OPTION) {
+                endGame();
+                return;
+            } else {
+                questCount = 0;
             }
-            currentQuestionIndex++;
-            displayQuestion();
         } else {
-            JOptionPane.showMessageDialog(this, "Incorrect answer!", "Game Over", JOptionPane.ERROR_MESSAGE);
-            userData.setMoney(0);
+            JOptionPane.showMessageDialog(this, "You finished all rounds!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
             endGame();
+            return;
         }
     }
+    
+    currentQuestionIndex++;
+    displayQuestion();
+}
+
 
     private void endGame() {
         UserFileHandler userFileHandler = new UserFileHandler();
@@ -178,4 +189,4 @@ public class GamePanel extends JPanel {
             checkAnswer(firstCharString);
         }
     }
-} 
+}
