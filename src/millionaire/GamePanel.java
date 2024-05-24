@@ -56,16 +56,27 @@ public class GamePanel extends JPanel {
         }
 
         // Use FlowLayout for options panel
+        // Inside the constructor of GamePanel
+
+// Use BorderLayout for options panel
+// Inside the constructor of GamePanel
+
+// Use BorderLayout for options panel
+// Inside the constructor of GamePanel
+
+// Use BorderLayout for options panel
         JPanel optionsPanel = new JPanel();
         optionsPanel.setLayout(new GridLayout(4, 1, 0, 10)); // 4 rows, 1 column, with vertical gap of 10 pixels
-        optionsPanel.setBounds(700, 100, 200, 160); // Adjust position and size as needed
+        optionsPanel.setBounds(100, 100, 250, 160); // Adjust position and size as needed
         optionsPanel.setOpaque(false); // Make the panel transparent
         add(optionsPanel);
 
         // Add option buttons to the optionsPanel
         for (int i = 0; i < optionButtons.length; i++) {
             optionsPanel.add(optionButtons[i]);
-        }
+        }   
+
+
 
         moneyLabel = new JLabel("Current Money: $0");
         moneyLabel.setFont(new Font("Arial", Font.BOLD, 20));
@@ -169,6 +180,9 @@ public class GamePanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Incorrect answer!", "Game Over", JOptionPane.ERROR_MESSAGE);
             userData.setMoney(0);
             endGame();
+            
+            // Set the panel background to red for incorrect answer
+            setBackground(Color.RED);
         }
 
         // Update the corresponding square in SquarePanel
