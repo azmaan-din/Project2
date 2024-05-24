@@ -17,7 +17,7 @@ public class WhoWantsToBeAMillionaire {
 
         JFrame frame = new JFrame("Who Want to be a Millionaire");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 10000);
+        frame.setSize(1000, 600);
         frame.setLocationRelativeTo(null);
 
         CardLayout cardLayout = new CardLayout();
