@@ -1,8 +1,7 @@
 package millionaire;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -10,11 +9,6 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
 
@@ -30,7 +24,9 @@ public class GamePanel extends JPanel {
     private JLabel questionLabel;
     private JButton[] optionButtons;
     private JLabel moneyLabel;
-    private SquarePanel squarePanel;
+
+    private SquarePanel squarePanel; // SquarePanel instance
+    private int squaresCompleted; // Counter to track completed squares
 
     public GamePanel(CardLayout cardLayout, JPanel mainPanel, Player userData) {
         this.userData = userData;
@@ -42,31 +38,58 @@ public class GamePanel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
-        setBackground(new Color(0x1e1e1e));
+        setBackground(new Color(0x17191a)); // Set background color to #17191a
+        setBorder(BorderFactory.createLineBorder(Color.GREEN, 2)); // Set green border
 
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        questionLabel.setForeground(Color.WHITE);
+        questionLabel.setForeground(Color.GREEN);
         questionLabel.setBounds(50, 20, 600, 80);
         add(questionLabel);
 
         optionButtons = new JButton[4];
         for (int i = 0; i < optionButtons.length; i++) {
             optionButtons[i] = createButton();
-            optionButtons[i].setBounds(50, 100 + (i * 50), 600, 40);
+            // Adjust position for options panel
+            optionButtons[i].setBounds(0, 0, 180, 40);
             optionButtons[i].addActionListener(new OptionButtonListener());
-            add(optionButtons[i]);
         }
+
+        // Use FlowLayout for options panel
+        // Inside the constructor of GamePanel
+
+// Use BorderLayout for options panel
+// Inside the constructor of GamePanel
+
+// Use BorderLayout for options panel
+// Inside the constructor of GamePanel
+
+// Use BorderLayout for options panel
+        JPanel optionsPanel = new JPanel();
+        optionsPanel.setLayout(new GridLayout(4, 1, 0, 10)); // 4 rows, 1 column, with vertical gap of 10 pixels
+        optionsPanel.setBounds(100, 100, 250, 160); // Adjust position and size as needed
+        optionsPanel.setOpaque(false); // Make the panel transparent
+        add(optionsPanel);
+
+        // Add option buttons to the optionsPanel
+        for (int i = 0; i < optionButtons.length; i++) {
+            optionsPanel.add(optionButtons[i]);
+        }   
+
+
 
         moneyLabel = new JLabel("Current Money: $0");
         moneyLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        moneyLabel.setForeground(Color.WHITE);
+        moneyLabel.setForeground(Color.GREEN);
         moneyLabel.setBounds(50, 350, 600, 30);
         add(moneyLabel);
 
+        // Initialize SquarePanel
         squarePanel = new SquarePanel();
-        squarePanel.setBounds(50, 400, 300, 50);
+        squarePanel.setBounds(50, 400, 600, 50); // Adjust position and size as needed
         add(squarePanel);
+
+        squaresCompleted = 0; // Initialize completed squares counter
 
         loadQuestions();
 
@@ -77,7 +100,7 @@ public class GamePanel extends JPanel {
 
     private JButton createButton() {
         JButton button = new JButton();
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.GREEN);
         button.setBackground(new Color(0x007BFF));
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
@@ -127,43 +150,45 @@ public class GamePanel extends JPanel {
         }
     }
 
-private void checkAnswer(String userAnswer) {
-    Questions question = allQuestions.get(currentQuestionIndex);
-    if (question.getAnswer().equalsIgnoreCase(userAnswer)) {
-        userData.updateMoney(prizeMoney);
-        prizeMoney *= 2;
-        moneyLabel.setText("Current Money: $" + userData.getMoney());
-        squarePanel.fillSquare(questCount, true);
-    } else {
-        JOptionPane.showMessageDialog(this, "Incorrect answer!", "Game Over", JOptionPane.ERROR_MESSAGE);
-        userData.setMoney(0);
-        squarePanel.fillSquare(questCount, false);
-        endGame();
-        return;
-    }
-    
-    questCount++;
-    if (questCount == 8) { // Adjusted condition for round completion
-        round++;
-        if (round != 5) {
-            int response = JOptionPane.showConfirmDialog(this, "You have completed round " + (round - 1) + ".\nDo you wish to continue?", "Round Completed", JOptionPane.YES_NO_OPTION);
-            if (response == JOptionPane.NO_OPTION) {
-                endGame();
-                return;
-            } else {
-                questCount = 0;
+    private void checkAnswer(String userAnswer) {
+        Questions question = allQuestions.get(currentQuestionIndex);
+        boolean isCorrect = question.getAnswer().equalsIgnoreCase(userAnswer);
+        if (isCorrect) {
+            userData.updateMoney(prizeMoney);
+            prizeMoney *= 2;
+            moneyLabel.setText("Current Money: $" + userData.getMoney());
+            questCount++;
+            if (questCount == 2) {
+                round++;
+                if (round != 5) {
+                    int response = JOptionPane.showConfirmDialog(this, "You have completed round " + (round - 1) + ".\nDo you wish to continue?", "Round Completed", JOptionPane.YES_NO_OPTION);
+                    if (response == JOptionPane.NO_OPTION) {
+                        endGame();
+                        return;
+                    } else {
+                        questCount = 0;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "You finished all rounds!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    endGame();
+                    return;
+                }
             }
+            currentQuestionIndex++;
+            displayQuestion();
         } else {
-            JOptionPane.showMessageDialog(this, "You finished all rounds!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Incorrect answer!", "Game Over", JOptionPane.ERROR_MESSAGE);
+            userData.setMoney(0);
             endGame();
-            return;
+            
+            // Set the panel background to red for incorrect answer
+            setBackground(Color.RED);
         }
-    }
-    
-    currentQuestionIndex++;
-    displayQuestion();
-}
 
+        // Update the corresponding square in SquarePanel
+        squarePanel.fillSquare(squaresCompleted, isCorrect);
+        squaresCompleted++;
+    }
 
     private void endGame() {
         UserFileHandler userFileHandler = new UserFileHandler();
