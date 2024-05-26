@@ -1,11 +1,7 @@
 package millionaire;
 
-/**
- *
- * @author Azmaan, Yash
- */
-// Importing IOException class from java.io package
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.JFrame;
@@ -15,7 +11,7 @@ public class WhoWantsToBeAMillionaire {
 
     public static void main(String[] args) throws IOException, SQLException {
 
-        JFrame frame = new JFrame("Who Want to be a Millionaire");
+        JFrame frame = new JFrame("Who Wants to be a Millionaire");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 600);
         frame.setLocationRelativeTo(null);
@@ -51,10 +47,16 @@ public class WhoWantsToBeAMillionaire {
         frame.setVisible(true);
 
         Database data = new Database();
-        //calls create table 
         data.userDataTable();
         data.leaderboardTable();
-
     }
 
+    public static LeaderboardPanel getLeaderboardPanel(JPanel mainPanel) {
+        for (Component comp : mainPanel.getComponents()) {
+            if (comp instanceof LeaderboardPanel) {
+                return (LeaderboardPanel) comp;
+            }
+        }
+        return null;
+    }
 }
