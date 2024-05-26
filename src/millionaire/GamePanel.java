@@ -66,8 +66,8 @@ public class GamePanel extends JPanel {
         add(optionsPanel);
 
         // Add option buttons to the optionsPanel
-        for (int i = 0; i < optionButtons.length; i++) {
-            optionsPanel.add(optionButtons[i]);
+        for (JButton optionButton : optionButtons) {
+            optionsPanel.add(optionButton);
         }
 
         moneyLabel = new JLabel("Current Money: $0");

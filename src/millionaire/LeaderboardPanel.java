@@ -29,6 +29,9 @@ public class LeaderboardPanel extends JPanel {
     private static final Color TEXT_COLOUR = new Color(0xEDF2F4);
     private static final Color BUTTON_COLOUR = new Color(0xEF233C);
     private static final Color BUTTON_HOVER_COLOUR = new Color(0xD90429);
+    private static final Color FIRST_PLACE_COLOUR = new Color(0xFFD700);
+    private static final Color SECOND_PLACE_COLOUR = new Color(0xC0C0C0);
+    private static final Color THIRD_PLACE_COLOUR = new Color(0xCD7F32);
 
     public LeaderboardPanel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
@@ -113,19 +116,19 @@ public class LeaderboardPanel extends JPanel {
 
                 JLabel rankLabel = new JLabel(String.valueOf(rank), SwingConstants.CENTER);
                 rankLabel.setFont(new Font("Arial", Font.BOLD, 16));
-                rankLabel.setForeground(rank <= 3 ? Color.YELLOW : Color.WHITE);
+                rankLabel.setForeground(rank <= 1 ? FIRST_PLACE_COLOUR : rank <= 2 ? SECOND_PLACE_COLOUR : rank <= 3 ? THIRD_PLACE_COLOUR : TEXT_COLOUR);
                 rankLabel.setBounds(10, 5, 30, 30);
                 entryPanel.add(rankLabel);
 
                 JLabel nameLabel = new JLabel(userData.getFirstname() + " " + userData.getLastname(), SwingConstants.LEFT);
                 nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-                nameLabel.setForeground(rank <= 3 ? Color.YELLOW : Color.WHITE);
+                nameLabel.setForeground(rank <= 1 ? FIRST_PLACE_COLOUR : rank <= 2 ? SECOND_PLACE_COLOUR : rank <= 3 ? THIRD_PLACE_COLOUR : TEXT_COLOUR);
                 nameLabel.setBounds(50, 5, 250, 30);
                 entryPanel.add(nameLabel);
 
                 JLabel moneyLabel = new JLabel("Money: " + userData.getMoney(), SwingConstants.RIGHT);
                 moneyLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-                moneyLabel.setForeground(rank <= 3 ? Color.YELLOW : Color.WHITE);
+                moneyLabel.setForeground(rank <= 1 ? FIRST_PLACE_COLOUR : rank <= 2 ? SECOND_PLACE_COLOUR : rank <= 3 ? THIRD_PLACE_COLOUR : TEXT_COLOUR);
                 moneyLabel.setBounds(310, 5, 120, 30);
                 entryPanel.add(moneyLabel);
 
