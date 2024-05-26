@@ -17,8 +17,7 @@ import java.io.IOException;
 import javax.swing.BorderFactory;
 
 /**
- * A JPanel for displaying and submitting user feedback.
- * Author: user
+ * A JPanel for displaying and submitting user feedback. Author: user
  */
 public class FeedbackDisplay extends JPanel {
 
@@ -27,23 +26,28 @@ public class FeedbackDisplay extends JPanel {
     private JButton mainMenuButton;
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private static final Color BACKGROUND_COLOUR = new Color(0x2B2D42);
+    private static final Color TEXT_COLOUR = new Color(0xEDF2F4);
+    private static final Color BUTTON_COLOUR = new Color(0xEF233C);
+    private static final Color BUTTON_HOVER_COLOUR = new Color(0xD90429);
+    private static final Color INPUT_COLOUR = new Color(0x8D99AE);
 
     public FeedbackDisplay(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
         setLayout(new BorderLayout());
-        setBackground(new Color(0x1e1e1e));
+        setBackground(BACKGROUND_COLOUR);
 
         feedbackTextArea = new JTextArea(10, 30);
-        feedbackTextArea.setBackground(new Color(0x1e1e1e));
-        feedbackTextArea.setForeground(Color.GREEN);
+        feedbackTextArea.setBackground(INPUT_COLOUR);
+        feedbackTextArea.setForeground(TEXT_COLOUR);
         JScrollPane scrollPane = new JScrollPane(feedbackTextArea);
         add(scrollPane, BorderLayout.CENTER);
 
         submitButton = createButton("Submit Feedback");
         add(submitButton, BorderLayout.SOUTH);
-        
+
         mainMenuButton = createButton("Main Menu");
         add(mainMenuButton, BorderLayout.NORTH);
 
@@ -55,33 +59,33 @@ public class FeedbackDisplay extends JPanel {
                     try {
                         Feedback.feedback(feedback);
                         JOptionPane.showMessageDialog(
-                            FeedbackDisplay.this,
-                            "Thank you for your feedback!",
-                            "Feedback",
-                            JOptionPane.INFORMATION_MESSAGE
+                                FeedbackDisplay.this,
+                                "Thank you for your feedback!",
+                                "Feedback",
+                                JOptionPane.INFORMATION_MESSAGE
                         );
-                        feedbackTextArea.setText("");  
-                        cardLayout.show(mainPanel, "InitialPanel");  
+                        feedbackTextArea.setText("");
+                        cardLayout.show(mainPanel, "InitialPanel");
                     } catch (IOException ioException) {
                         JOptionPane.showMessageDialog(
-                            FeedbackDisplay.this,
-                            "Error saving feedback. Please try again.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE
+                                FeedbackDisplay.this,
+                                "Error saving feedback. Please try again.",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
                         );
                     }
                 } else {
                     JOptionPane.showMessageDialog(
-                        FeedbackDisplay.this,
-                        "Feedback cannot be empty.",
-                        "Warning",
-                        JOptionPane.WARNING_MESSAGE
+                            FeedbackDisplay.this,
+                            "Feedback cannot be empty.",
+                            "Warning",
+                            JOptionPane.WARNING_MESSAGE
                     );
                 }
             }
         });
-        
-                mainMenuButton.addActionListener(new ActionListener() {
+
+        mainMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "InitialPanel");
@@ -89,10 +93,11 @@ public class FeedbackDisplay extends JPanel {
         });
 
     }
-        private JButton createButton(String text) {
+
+    private JButton createButton(String text) {
         JButton button = new JButton(text);
-        button.setForeground(Color.GREEN);
-        button.setBackground(new Color(0x007BFF));
+        button.setForeground(TEXT_COLOUR);
+        button.setBackground(BUTTON_COLOUR);
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createCompoundBorder(
@@ -103,12 +108,12 @@ public class FeedbackDisplay extends JPanel {
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                button.setBackground(new Color(0x0056b3));
+                button.setBackground(BUTTON_HOVER_COLOUR);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                button.setBackground(new Color(0x007BFF));
+                button.setBackground(BUTTON_COLOUR);
             }
         });
 

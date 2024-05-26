@@ -28,6 +28,11 @@ public class GamePanel extends JPanel {
     private SquarePanel squarePanel; // SquarePanel instance
     private int squaresCompleted; // Counter to track completed squares
 
+    private static final Color BACKGROUND_COLOUR = new Color(0x2B2D42);
+    private static final Color TEXT_COLOUR = new Color(0xEDF2F4);
+    private static final Color BUTTON_COLOUR = new Color(0xEF233C);
+    private static final Color BUTTON_HOVER_COLOUR = new Color(0xD90429);
+
     public GamePanel(CardLayout cardLayout, JPanel mainPanel, Player userData) {
         this.userData = userData;
         this.prizeMoney = 2500;
@@ -38,12 +43,11 @@ public class GamePanel extends JPanel {
         this.mainPanel = mainPanel;
 
         setLayout(null);
-        setBackground(new Color(0x17191a)); // Set background color to #17191a
-        setBorder(BorderFactory.createLineBorder(Color.GREEN, 2)); // Set green border
+        setBackground(BACKGROUND_COLOUR);
 
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        questionLabel.setForeground(Color.GREEN);
+        questionLabel.setForeground(TEXT_COLOUR);
         questionLabel.setBounds(50, 20, 600, 80);
         add(questionLabel);
 
@@ -55,16 +59,6 @@ public class GamePanel extends JPanel {
             optionButtons[i].addActionListener(new OptionButtonListener());
         }
 
-        // Use FlowLayout for options panel
-        // Inside the constructor of GamePanel
-
-// Use BorderLayout for options panel
-// Inside the constructor of GamePanel
-
-// Use BorderLayout for options panel
-// Inside the constructor of GamePanel
-
-// Use BorderLayout for options panel
         JPanel optionsPanel = new JPanel();
         optionsPanel.setLayout(new GridLayout(4, 1, 0, 10)); // 4 rows, 1 column, with vertical gap of 10 pixels
         optionsPanel.setBounds(100, 100, 250, 160); // Adjust position and size as needed
@@ -74,13 +68,11 @@ public class GamePanel extends JPanel {
         // Add option buttons to the optionsPanel
         for (int i = 0; i < optionButtons.length; i++) {
             optionsPanel.add(optionButtons[i]);
-        }   
-
-
+        }
 
         moneyLabel = new JLabel("Current Money: $0");
         moneyLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        moneyLabel.setForeground(Color.GREEN);
+        moneyLabel.setForeground(TEXT_COLOUR);
         moneyLabel.setBounds(50, 350, 600, 30);
         add(moneyLabel);
 
@@ -100,24 +92,20 @@ public class GamePanel extends JPanel {
 
     private JButton createButton() {
         JButton button = new JButton();
-        button.setForeground(Color.GREEN);
-        button.setBackground(new Color(0x007BFF));
+        button.setForeground(TEXT_COLOUR);
+        button.setBackground(BUTTON_COLOUR);
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(0x0056b3), 1),
-                BorderFactory.createEmptyBorder(5, 15, 5, 15)
-        ));
 
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(0x0056b3));
+                button.setBackground(BUTTON_HOVER_COLOUR);
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(0x007BFF));
+                button.setBackground(BUTTON_COLOUR);
             }
         });
 
@@ -180,7 +168,7 @@ public class GamePanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Incorrect answer!", "Game Over", JOptionPane.ERROR_MESSAGE);
             userData.setMoney(0);
             endGame();
-            
+
             // Set the panel background to red for incorrect answer
             setBackground(Color.RED);
         }
@@ -190,29 +178,29 @@ public class GamePanel extends JPanel {
         squaresCompleted++;
     }
 
-private void endGame() {
-    UserDataManager userFileHandler = new UserDataManager();
-    moneyLabel.setText("Current Money: $" + userData.getMoney());
-    try {
-        userFileHandler.storeUserDataToDatabase(userData);
-        JOptionPane.showMessageDialog(this, "Game over! Your final winnings are: $" + userData.getMoney(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
-        cardLayout.show(mainPanel, "InitialPanel");
+    private void endGame() {
+        UserDataManager userFileHandler = new UserDataManager();
+        moneyLabel.setText("Current Money: $" + userData.getMoney());
+        try {
+            userFileHandler.storeUserDataToDatabase(userData);
+            JOptionPane.showMessageDialog(this, "Game over! Your final winnings are: $" + userData.getMoney(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            cardLayout.show(mainPanel, "InitialPanel");
 
-        // Get LeaderboardPanel and refresh it
-        LeaderboardPanel leaderboardPanel = WhoWantsToBeAMillionaire.getLeaderboardPanel(mainPanel);
-        if (leaderboardPanel != null) {
-            leaderboardPanel.refreshLeaderboard();
-        } else {
-            Logger.getLogger(GamePanel.class.getName()).log(Level.WARNING, "LeaderboardPanel not found.");
+            // Get LeaderboardPanel and refresh it
+            LeaderboardPanel leaderboardPanel = WhoWantsToBeAMillionaire.getLeaderboardPanel(mainPanel);
+            if (leaderboardPanel != null) {
+                leaderboardPanel.refreshLeaderboard();
+            } else {
+                Logger.getLogger(GamePanel.class.getName()).log(Level.WARNING, "LeaderboardPanel not found.");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, "An error occurred while storing user data.", ex);
         }
-
-    } catch (SQLException ex) {
-        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, "An error occurred while storing user data.", ex);
     }
-}
-
 
     private class OptionButtonListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton source = (JButton) e.getSource();

@@ -1,4 +1,5 @@
 package millionaire;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -25,12 +26,17 @@ public class Panel extends JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
+    private static final Color BACKGROUND_COLOUR = new Color(0x2B2D42);
+    private static final Color TEXT_COLOUR = new Color(0xEDF2F4);
+    private static final Color BUTTON_COLOUR = new Color(0xEF233C);
+    private static final Color BUTTON_HOVER_COLOUR = new Color(0xD90429);
+
     public Panel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
         setLayout(null);
-        setBackground(new Color(0x1e1e1e));
+        setBackground(BACKGROUND_COLOUR);
 
         // Create buttons
         startButton = createButton("Start", 100, 80);
@@ -75,32 +81,25 @@ public class Panel extends JPanel {
                 cardLayout.show(mainPanel, "FeedbackDisplay");
             }
         });
-
-        setBorder(BorderFactory.createLineBorder(Color.GREEN, 3)); // Set green border
     }
 
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 200, 40);
-        button.setForeground(Color.GREEN);
-        button.setBackground(new Color(0x007BFF));
+        button.setForeground(TEXT_COLOUR);
+        button.setBackground(BUTTON_COLOUR);
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
-
-        // Set green border
-        Border lineBorder = BorderFactory.createLineBorder(Color.GREEN, 4); // Green border, size 4
-        Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10); // Empty border size 10
-        button.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
 
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                button.setBackground(new Color(0x0056b3));
+                button.setBackground(BUTTON_HOVER_COLOUR);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                button.setBackground(new Color(0x007BFF));
+                button.setBackground(BUTTON_COLOUR);
             }
         });
 

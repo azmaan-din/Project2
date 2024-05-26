@@ -4,7 +4,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JPanel;
-import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -13,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 /**
  * LeaderboardPanel class for displaying the leaderboard.
@@ -22,44 +24,54 @@ public class LeaderboardPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private List<Data> leaderboardData;
+    private JPanel leaderboardContainer;
+    private static final Color BACKGROUND_COLOUR = new Color(0x2B2D42);
+    private static final Color TEXT_COLOUR = new Color(0xEDF2F4);
+    private static final Color BUTTON_COLOUR = new Color(0xEF233C);
+    private static final Color BUTTON_HOVER_COLOUR = new Color(0xD90429);
 
     public LeaderboardPanel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
         setLayout(null);
-        setBackground(new Color(0x17191a)); // Set background color to #17191a
-        setBorder(BorderFactory.createLineBorder(Color.GREEN, 2)); // Set green border
+        setBackground(BACKGROUND_COLOUR);
 
         JButton backButton = createButton("Back", 20, 20);
         add(backButton);
 
         backButton.addActionListener(e -> cardLayout.show(mainPanel, "InitialPanel"));
 
+        leaderboardContainer = new JPanel();
+        leaderboardContainer.setLayout(null);
+        leaderboardContainer.setBackground(BACKGROUND_COLOUR);
+
+        JScrollPane scrollPane = new JScrollPane(leaderboardContainer);
+        scrollPane.setBounds(20, 80, 460, 400);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        add(scrollPane);
+
         refreshLeaderboard();
     }
 
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
-        button.setBounds(x, y, 200, 40);
-        button.setForeground(Color.GREEN);
-        button.setBackground(new Color(0x007BFF));
+        button.setBounds(x, y, 100, 40);
+        button.setForeground(TEXT_COLOUR);
+        button.setBackground(BUTTON_COLOUR);
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GREEN, 2), // Set green border
-                BorderFactory.createEmptyBorder(5, 15, 5, 15)
-        ));
 
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                button.setBackground(new Color(0x0056b3));
+                button.setBackground(BUTTON_HOVER_COLOUR);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                button.setBackground(new Color(0x007BFF));
+                button.setBackground(BUTTON_COLOUR);
             }
         });
 
@@ -74,43 +86,65 @@ public class LeaderboardPanel extends JPanel {
     public void refreshLeaderboard() {
         try {
             fetchLeaderboardData();
-            repaint();
+            updateLeaderboard();
         } catch (SQLException e) {
             Logger.getLogger(LeaderboardPanel.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
-@Override
-protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-    g.setColor(Color.YELLOW);
-    g.drawString("Leaderboard", ((getSize().width - 75) / 2), 30);
+    private void updateLeaderboard() {
+        leaderboardContainer.removeAll();
 
-    g.setFont(new Font("TimesRoman", Font.PLAIN, 16));
-    int yPosition = 100;
-    int rank = 1;
+        JLabel titleLabel = new JLabel("Leaderboard", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("TimesRoman", Font.BOLD, 24));
+        titleLabel.setForeground(Color.YELLOW);
+        titleLabel.setBounds(0, 0, 460, 40);
+        leaderboardContainer.add(titleLabel);
 
-    if (leaderboardData != null) {
-        for (Data userData : leaderboardData) {
-            if (rank <= 3) {
-                // Set the color to yellow for the top 3 users' names
-                g.setColor(Color.YELLOW);
-            } else {
-                // Set the color to white for other users' names
-                g.setColor(Color.WHITE);
+        if (leaderboardData != null && !leaderboardData.isEmpty()) {
+            int yPosition = 60;
+            int rank = 1;
+
+            for (Data userData : leaderboardData) {
+                JPanel entryPanel = new JPanel();
+                entryPanel.setLayout(null);
+                entryPanel.setBackground(rank <= 3 ? new Color(0x333333) : new Color(0x202020));
+                entryPanel.setBounds(10, yPosition, 440, 40);
+
+                JLabel rankLabel = new JLabel(String.valueOf(rank), SwingConstants.CENTER);
+                rankLabel.setFont(new Font("Arial", Font.BOLD, 16));
+                rankLabel.setForeground(rank <= 3 ? Color.YELLOW : Color.WHITE);
+                rankLabel.setBounds(10, 5, 30, 30);
+                entryPanel.add(rankLabel);
+
+                JLabel nameLabel = new JLabel(userData.getFirstname() + " " + userData.getLastname(), SwingConstants.LEFT);
+                nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+                nameLabel.setForeground(rank <= 3 ? Color.YELLOW : Color.WHITE);
+                nameLabel.setBounds(50, 5, 250, 30);
+                entryPanel.add(nameLabel);
+
+                JLabel moneyLabel = new JLabel("Money: " + userData.getMoney(), SwingConstants.RIGHT);
+                moneyLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+                moneyLabel.setForeground(rank <= 3 ? Color.YELLOW : Color.WHITE);
+                moneyLabel.setBounds(310, 5, 120, 30);
+                entryPanel.add(moneyLabel);
+
+                leaderboardContainer.add(entryPanel);
+
+                yPosition += 50;
+                rank++;
             }
 
-            String entry = rank + ". " + userData.getFirstname() + " " + userData.getLastname() + " - Money: " + userData.getMoney();
-            g.drawString(entry, 50, yPosition);
-            yPosition += 30;
-            rank++;
+            leaderboardContainer.setPreferredSize(new java.awt.Dimension(460, yPosition + 20));
+        } else {
+            JLabel noDataLabel = new JLabel("No data available.", SwingConstants.CENTER);
+            noDataLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+            noDataLabel.setForeground(TEXT_COLOUR);
+            noDataLabel.setBounds(0, 60, 460, 30);
+            leaderboardContainer.add(noDataLabel);
         }
-    } else {
-        g.setColor(Color.WHITE);
-        g.drawString("No data available.", 50, yPosition);
+
+        leaderboardContainer.revalidate();
+        leaderboardContainer.repaint();
     }
-}
-
-
 }

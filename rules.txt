@@ -1,6 +1,3 @@
-************************************************************************
-******************************* RULES **********************************
-************************************************************************
 The user is prompted to input their age and first and last name after selecting 
 the "start game" option
 
@@ -8,7 +5,7 @@ When a player will be presented with a maximum of eight questions covering any t
 As they advance the questions become more challenging
 
 The player must be permitted to affirm that the option they have chosen is their final response 
-that confirms thats their answer
+that confirms that's their answer
 
 The user forfeits the game and is not awarded any money if they provide an inaccurate 
 response to a question.
@@ -30,6 +27,3 @@ Each question has a respective dollar value. These dollar values shall include t
 following amounts: Question 7 is 320,000 and Question 8 is $1,000,000
 The player cannot walk away at this round however, once they complete this round they
 will win the game and walk away with 1 million dollars.
-*********************************************************************************
-********************************RULES********************************************
-*********************************************************************************

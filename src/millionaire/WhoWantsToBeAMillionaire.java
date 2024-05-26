@@ -20,8 +20,8 @@ public class WhoWantsToBeAMillionaire {
         JPanel mainPanel = new JPanel(cardLayout);
 
         Panel initialPanel = new Panel(cardLayout, mainPanel);
-        UserDataPage userDataPage = new UserDataPage(cardLayout, mainPanel);
-        RulesDisplay rulesDisplay = new RulesDisplay(cardLayout, mainPanel);
+        UserDataPanel userDataPage = new UserDataPanel(cardLayout, mainPanel);
+        RulesPanel rulesDisplay = new RulesPanel(cardLayout, mainPanel);
         FeedbackDisplay feedbackDisplay = new FeedbackDisplay(cardLayout, mainPanel);
         GamePanel gamePanel = new GamePanel(cardLayout, mainPanel, null);
         LeaderboardPanel leaderboardPanel = new LeaderboardPanel(cardLayout, mainPanel);
