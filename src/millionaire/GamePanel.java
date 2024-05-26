@@ -199,10 +199,15 @@ public class GamePanel extends JPanel {
             cardLayout.show(mainPanel, "InitialPanel");
             LeaderboardPanel leaderboardPanel = (LeaderboardPanel) mainPanel.getComponent(mainPanel.getComponentZOrder(this) - 1);
             leaderboardPanel.refreshLeaderboard();
-        } catch (SQLException ex) {
-            Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, "An error occurred while storing user data.", ex);
+        } else {
+            Logger.getLogger(GamePanel.class.getName()).log(Level.WARNING, "LeaderboardPanel not found.");
         }
+
+    } catch (SQLException ex) {
+        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, "An error occurred while storing user data.", ex);
     }
+}
+
 
     private class OptionButtonListener implements ActionListener {
         @Override
