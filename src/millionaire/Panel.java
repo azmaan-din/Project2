@@ -1,18 +1,24 @@
 package millionaire;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.border.Border;
 
 public class Panel extends JPanel {
@@ -24,6 +30,7 @@ public class Panel extends JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private JLabel imageLabel;
 
     public Panel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
@@ -33,16 +40,19 @@ public class Panel extends JPanel {
         setBackground(new Color(0x1e1e1e));
 
         // Create buttons
-        startButton = createButton("Start", 100, 80);
-        rulesButton = createButton("Rules", 100, 180);
-        leaderboardButton = createButton("Leaderboard", 100, 280);
-        feedbackButton = createButton("Feedback", 100, 380);
+        startButton = createButton("Start", 50, 180);
+        rulesButton = createButton("Rules", 50, 280);
+        leaderboardButton = createButton("Leaderboard", 400, 180);
+        feedbackButton = createButton("Feedback", 400, 280);
 
         // Add buttons to the panel
         add(startButton);
         add(rulesButton);
         add(leaderboardButton);
         add(feedbackButton);
+
+        // Load and add image to the panel
+       
 
         // Add action listeners
         startButton.addActionListener(new ActionListener() {
@@ -110,10 +120,8 @@ public class Panel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setFont(new Font("TimesRoman", Font.BOLD, 30)); // Set font size to 30
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
         g.setColor(Color.ORANGE);
-        // Adjust position of title
-        int stringWidth = g.getFontMetrics().stringWidth("Who Wants to be a Millionaire");
-        g.drawString("Who Wants to be a Millionaire", (getWidth() - stringWidth) / 2, 50);
+        g.drawString("Who Wants to be a Millionaire", ((getSize().width - 250) / 2), 30);
     }
 }
