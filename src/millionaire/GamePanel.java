@@ -190,14 +190,17 @@ public class GamePanel extends JPanel {
         squaresCompleted++;
     }
 
-    private void endGame() {
-        UserDataManager userFileHandler = new UserDataManager();
-        moneyLabel.setText("Current Money: $" + userData.getMoney());
-        try {
-            userFileHandler.storeUserDataToDatabase(userData);
-            JOptionPane.showMessageDialog(this, "Game over! Your final winnings are: $" + userData.getMoney(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
-            cardLayout.show(mainPanel, "InitialPanel");
-            LeaderboardPanel leaderboardPanel = (LeaderboardPanel) mainPanel.getComponent(mainPanel.getComponentZOrder(this) - 1);
+private void endGame() {
+    UserFileHandler userFileHandler = new UserFileHandler();
+    moneyLabel.setText("Current Money: $" + userData.getMoney());
+    try {
+        userFileHandler.storeUserDataToDatabase(userData);
+        JOptionPane.showMessageDialog(this, "Game over! Your final winnings are: $" + userData.getMoney(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        cardLayout.show(mainPanel, "InitialPanel");
+
+        // Get LeaderboardPanel and refresh it
+        LeaderboardPanel leaderboardPanel = WhoWantsToBeAMillionaire.getLeaderboardPanel(mainPanel);
+        if (leaderboardPanel != null) {
             leaderboardPanel.refreshLeaderboard();
         } else {
             Logger.getLogger(GamePanel.class.getName()).log(Level.WARNING, "LeaderboardPanel not found.");

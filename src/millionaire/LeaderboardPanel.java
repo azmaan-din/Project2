@@ -67,7 +67,7 @@ public class LeaderboardPanel extends JPanel {
     }
 
     private void fetchLeaderboardData() throws SQLException {
-        UserDataManager userFileHandler = new UserDataManager();
+        UserFileHandler userFileHandler = new UserFileHandler();
         leaderboardData = userFileHandler.getLeaderboardData();
     }
 

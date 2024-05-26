@@ -73,7 +73,7 @@ public class UserDataPage extends JPanel {
             JOptionPane.showMessageDialog(null, "Please enter a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }
         Player userData = new Player(0, firstName, lastName, age, 0);
-        UserDataManager userFileHandler = new UserDataManager();
+        UserFileHandler userFileHandler = new UserFileHandler();
         try {
             userFileHandler.storeUserDataToDatabase(userData);
             // Clear text fields
