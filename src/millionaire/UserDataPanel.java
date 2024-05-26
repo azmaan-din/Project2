@@ -71,12 +71,20 @@ public class UserDataPanel extends JPanel {
                 // Handle submit button click
                 String firstName = firstNameTextField.getText();
                 String lastName = lastNameTextField.getText();
+                String ageText = ageTextField.getText();
+
+                if (firstName.isEmpty() || lastName.isEmpty() || ageText.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill in all the fields.", "Incomplete Data", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 int age = 0;
                 try {
-                    age = Integer.parseInt(ageTextField.getText());
+                    age = Integer.parseInt(ageText);
                 } catch (NumberFormatException z) {
                     System.out.println("Invalid input: Please enter a valid number.");
                     JOptionPane.showMessageDialog(null, "Please enter a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
                 Player userData = new Player(0, firstName, lastName, age, 0);
                 UserDataManager userFileHandler = new UserDataManager();
