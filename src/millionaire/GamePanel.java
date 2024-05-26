@@ -191,7 +191,7 @@ public class GamePanel extends JPanel {
     }
 
 private void endGame() {
-    UserFileHandler userFileHandler = new UserFileHandler();
+    UserDataManager userFileHandler = new UserDataManager();
     moneyLabel.setText("Current Money: $" + userData.getMoney());
     try {
         userFileHandler.storeUserDataToDatabase(userData);

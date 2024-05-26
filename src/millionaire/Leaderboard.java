@@ -17,7 +17,7 @@ public class Leaderboard {
     // method for leaderboard
     public static void displayLeaderboard() throws SQLException {
         try {
-            UserFileHandler userFileHandler = new UserFileHandler();
+            UserDataManager userFileHandler = new UserDataManager();
             List<Data> allUserData = userFileHandler.getAllUserData();
 
             if (allUserData.isEmpty()) {

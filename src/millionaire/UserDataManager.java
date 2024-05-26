@@ -12,7 +12,7 @@ import java.util.List;
  * @author Azmaan, Yash
  */
 // handles the reading and writing of user data
-public class UserFileHandler {
+public class UserDataManager {
 
     private static final String INSERT_USER_SQL = "INSERT INTO USERDATA (FIRSTNAME, LASTNAME, AGE, MONEY) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_USER_SQL = "UPDATE USERDATA SET LASTNAME = ?, AGE = ?, MONEY = ? WHERE FIRSTNAME = ?";
@@ -22,7 +22,7 @@ public class UserFileHandler {
 
     private final Connection conn;
 
-    public UserFileHandler() {
+    public UserDataManager() {
         DBManager dbManager = new DBManager();
         conn = dbManager.getConnection();
     }
