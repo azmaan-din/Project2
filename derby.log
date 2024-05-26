@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-----------------------------------------------------------------
-Sun May 26 20:28:04 NZST 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018f-b403-9340-00001e306050 
-on database directory E:\OneDrive - AUT University\Year 2\COMP603-Program Design and Construction\Project 2\WhoWantsToBeAMillionaire\UserDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@18ef96 
-Loaded from file:/E:/OneDrive%20-%20AUT%20University/Year%202/COMP603-Program%20Design%20and%20Construction/Project%202/WhoWantsToBeAMillionaire/lib/derby.jar
-=======
-----------------------------------------------------------------
+
 Sun May 26 17:04:19 NZST 2024:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018f-b349-0aa5-00000ed06b18 
 on database directory C:\Users\user\OneDrive\Documents\NetBeansProjects\Project2\UserDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
 Loaded from file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/Project2/lib/derby.jar
->>>>>>> origin/testing
-java.vendor=Oracle Corporation
+
 java.runtime.version=11.0.22+9-LTS-219
 user.dir=E:\OneDrive - AUT University\Year 2\COMP603-Program Design and Construction\Project 2\WhoWantsToBeAMillionaire
 os.name=Windows 11
