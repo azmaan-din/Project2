@@ -31,6 +31,8 @@ public class FeedbackDisplay extends JPanel {
     private static final Color BUTTON_COLOUR = new Color(0xEF233C);
     private static final Color BUTTON_HOVER_COLOUR = new Color(0xD90429);
     private static final Color INPUT_COLOUR = new Color(0x8D99AE);
+    private static final Font TEXT_FONT = new Font("Arial", Font.PLAIN, 24); // Increased font size
+    private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 20); // Increased font size
 
     public FeedbackDisplay(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
@@ -40,9 +42,11 @@ public class FeedbackDisplay extends JPanel {
         setBackground(BACKGROUND_COLOUR);
 
         feedbackTextArea = new JTextArea(10, 30);
+        feedbackTextArea.setFont(TEXT_FONT); // Set larger font for JTextArea
         feedbackTextArea.setBackground(INPUT_COLOUR);
         feedbackTextArea.setForeground(TEXT_COLOUR);
         JScrollPane scrollPane = new JScrollPane(feedbackTextArea);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); // Remove horizontal scrollbar
         add(scrollPane, BorderLayout.CENTER);
 
         submitButton = createButton("Submit Feedback");
@@ -98,7 +102,7 @@ public class FeedbackDisplay extends JPanel {
         JButton button = new JButton(text);
         button.setForeground(TEXT_COLOUR);
         button.setBackground(BUTTON_COLOUR);
-        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setFont(BUTTON_FONT); // Set larger font for JButton
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(0x0056b3), 1),
