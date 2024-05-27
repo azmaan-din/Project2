@@ -17,15 +17,17 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
-/**
- * LeaderboardPanel class for displaying the leaderboard.
- */
+
 public class LeaderboardPanel extends JPanel {
 
+    //going through panels
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    //list for leaderboard data
     private List<Data> leaderboardData;
     private JPanel leaderboardContainer;
+    
+    //user interface elements colours, for background and leaderboard
     private static final Color BACKGROUND_COLOUR = new Color(0x2B2D42);
     private static final Color TEXT_COLOUR = new Color(0xEDF2F4);
     private static final Color BUTTON_COLOUR = new Color(0xEF233C);
@@ -34,33 +36,34 @@ public class LeaderboardPanel extends JPanel {
     private static final Color SECOND_PLACE_COLOUR = new Color(0xC0C0C0);
     private static final Color THIRD_PLACE_COLOUR = new Color(0xCD7F32);
 
+    
+    //constructor to start the leaderboard panel 
     public LeaderboardPanel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
         setLayout(null);
         setBackground(BACKGROUND_COLOUR);
-
+        
+        //creating the back button
         JButton backButton = createButton("Back", 20, 20);
         add(backButton);
-
         backButton.addActionListener(e -> cardLayout.show(mainPanel, "InitialPanel"));
-
+        
+        //setting up the leaderboard such as colour and placement
         leaderboardContainer = new JPanel();
         leaderboardContainer.setLayout(null);
         leaderboardContainer.setBackground(BACKGROUND_COLOUR);
-
         JScrollPane scrollPane = new JScrollPane(leaderboardContainer);
         scrollPane.setBounds(20, 80, 470, 400);  // Updated width from 460 to 600
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane);
-
         refreshLeaderboard();
 
     }
-
+    //creating the leaderboard button , customizing the colour and font 
     private JButton createButton(String text, int x, int y) {
         JButton button = new JButton(text);
         button.setBounds(x, y, 100, 40);
@@ -68,7 +71,7 @@ public class LeaderboardPanel extends JPanel {
         button.setBackground(BUTTON_COLOUR);
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setFocusPainted(false);
-
+        //using mouse action for hovering
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -83,12 +86,12 @@ public class LeaderboardPanel extends JPanel {
 
         return button;
     }
-
+    
+    //refreshing the leaderboard stats 
     private void fetchLeaderboardData() throws SQLException {
         UserDataManager userFileHandler = new UserDataManager();
         leaderboardData = userFileHandler.getLeaderboardData();
     }
-
     public void refreshLeaderboard() {
         try {
             fetchLeaderboardData();
