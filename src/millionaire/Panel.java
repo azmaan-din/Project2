@@ -4,19 +4,17 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class Panel extends JPanel {
 
@@ -33,21 +31,12 @@ public class Panel extends JPanel {
     private static final Color BUTTON_COLOUR = new Color(0xEF233C);
     private static final Color BUTTON_HOVER_COLOUR = new Color(0xD90429);
 
-    private Image backgroundImage;
-
     public Panel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
         setLayout(null);
         setBackground(BACKGROUND_COLOUR);
-
-        // Load the image
-        try {
-            backgroundImage = ImageIO.read(new File("./YA.jpg")); // Replace with the correct path to your image
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         // Create buttons
         startButton = createButton("Start", 100, 80);
@@ -120,12 +109,6 @@ public class Panel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        // Draw the background image
-        if (backgroundImage != null) {
-            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        }
-
         g.setFont(new Font("TimesRoman", Font.BOLD, 30)); // Set font size to 30
         g.setColor(Color.ORANGE);
         // Adjust position of title
