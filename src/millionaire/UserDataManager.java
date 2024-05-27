@@ -1,5 +1,4 @@
 package millionaire;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,11 +8,12 @@ import java.util.List;
 
 /**
  *
- * @author Azmaan, Yash
+ * @author Azmaan
  */
-// handles the reading and writing of user data
+
 public class UserDataManager {
 
+    // queries for database
     private static final String INSERT_USER_SQL = "INSERT INTO USERDATA (FIRSTNAME, LASTNAME, AGE, MONEY) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_USER_SQL = "UPDATE USERDATA SET LASTNAME = ?, AGE = ?, MONEY = ? WHERE FIRSTNAME = ?";
     private static final String SELECT_ALL_USERS_SQL = "SELECT * FROM USERDATA";
@@ -22,15 +22,17 @@ public class UserDataManager {
 
     private final Connection conn;
 
+    //constructor for connection
     public UserDataManager() {
         DBManager dbManager = new DBManager();
         conn = dbManager.getConnection();
     }
 
+    // storing data in database 
     public void storeUserDataToDatabase(Data userData) throws SQLException {
         boolean userExists = false;
 
-        // Check if the user already exists
+        // see if the user exit 
         String checkUserSql = "SELECT COUNT(*) FROM USERDATA WHERE FIRSTNAME = ?";
         try ( PreparedStatement checkStmt = conn.prepareStatement(checkUserSql)) {
             checkStmt.setString(1, userData.getFirstname());
@@ -42,7 +44,7 @@ public class UserDataManager {
         }
 
         if (userExists) {
-            // Update existing user
+            // if the user exit then updates the data
             try ( PreparedStatement updateStmt = conn.prepareStatement(UPDATE_USER_SQL)) {
                 updateStmt.setString(1, userData.getLastname());
                 updateStmt.setInt(2, userData.getAge());
@@ -51,7 +53,7 @@ public class UserDataManager {
                 updateStmt.executeUpdate();
             }
         } else {
-            // Insert new user
+            // if doesnt exit then makes a new one
             try ( PreparedStatement insertStmt = conn.prepareStatement(INSERT_USER_SQL)) {
                 insertStmt.setString(1, userData.getFirstname());
                 insertStmt.setString(2, userData.getLastname());
@@ -64,9 +66,11 @@ public class UserDataManager {
 
     public List<Data> getAllUserData() throws SQLException {
         List<Data> userDataList = new ArrayList<>();
-
+        
+        //running query to get all users
         try ( PreparedStatement selectStmt = conn.prepareStatement(SELECT_ALL_USERS_SQL);  ResultSet rs = selectStmt.executeQuery()) {
 
+            //going over the results and adding data to list
             while (rs.next()) {
                 int userId = rs.getInt("USERID");
                 String firstName = rs.getString("FIRSTNAME");
@@ -79,6 +83,7 @@ public class UserDataManager {
         return userDataList;
     }
 
+    //adding user data into leaderboard
     public void insertLeaderboardData(Data userData) throws SQLException {
         try ( PreparedStatement insertStmt = conn.prepareStatement(INSERT_LEADERBOARD_SQL)) {
             insertStmt.setInt(1, userData.getUserId());
@@ -89,12 +94,14 @@ public class UserDataManager {
         }
     }
 
+    //clear the leaderboard 
     public void clearLeaderboard() throws SQLException {
         try ( PreparedStatement clearStmt = conn.prepareStatement(CLEAR_LEADERBOARD_SQL)) {
             clearStmt.executeUpdate();
         }
     }
 
+    //getting the leaderboard data and putting it in descending order
     public List<Data> getLeaderboardData() throws SQLException {
         List<Data> leaderboardDataList = new ArrayList<>();
         String selectLeaderboardSQL = "SELECT * FROM LEADERBOARD ORDER BY MONEY DESC";

@@ -1,5 +1,4 @@
 package millionaire;
-
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
@@ -18,7 +17,7 @@ import java.io.IOException;
 
 public class RulesPanel extends JPanel {
 
-    // Constants for UI customization
+    // elements for the user interface
     private static final Color BACKGROUND_COLOUR = new Color(0x2B2D42);
     private static final Color TEXT_COLOUR = new Color(0xEDF2F4);
     private static final Color BUTTON_COLOUR = new Color(0xEF233C);
@@ -31,27 +30,22 @@ public class RulesPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
+    //constructor for rules panel
     public RulesPanel(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
-        // Setting layout and background color
+        // set background colour
         setLayout(new BorderLayout());
         setBackground(BACKGROUND_COLOUR);
-
-        // Initialize components
         initializeComponents();
-
-        // Add components to panel
         addComponentsToPanel();
-
-        // Add event handlers
         addEventHandlers();
-
-        // Load rules from file
         loadRules();
     }
 
+    //components of the rules panel 
+    //setting up rules text area , colour , font size and colour and placements
     private void initializeComponents() {
         // Setting up the rules text area
         rulesTextArea = new JTextArea();
@@ -62,19 +56,17 @@ public class RulesPanel extends JPanel {
         rulesTextArea.setLineWrap(true);
         rulesTextArea.setWrapStyleWord(true);
         rulesTextArea.setMargin(new java.awt.Insets(10, 10, 10, 10));
-        
-        // Creating the main menu button
+        //making the main menu button
         mainMenuButton = createButton("Main Menu");
     }
 
+    //adding elements
     private void addComponentsToPanel() {
-        // Adding components to the panel
         add(rulesTextArea, BorderLayout.CENTER);
         add(mainMenuButton, BorderLayout.SOUTH);
     }
 
     private void addEventHandlers() {
-        // Event handler for the main menu button
         mainMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,6 +75,7 @@ public class RulesPanel extends JPanel {
         });
     }
 
+    //creating the buttons , choosing colour and font size
     private JButton createButton(String text) {
         JButton button = new JButton(text);
         button.setForeground(TEXT_COLOUR);
@@ -91,13 +84,14 @@ public class RulesPanel extends JPanel {
         button.setFocusPainted(false);
         button.setBorderPainted(false);
 
-        // Adding hover effect to the button
+        // Adding hovering for the buttons
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 button.setBackground(BUTTON_HOVER_COLOUR);
             }
-
+            
+            //reset the mouse colour when reset
             @Override
             public void mouseExited(MouseEvent e) {
                 button.setBackground(BUTTON_COLOUR);
@@ -107,10 +101,11 @@ public class RulesPanel extends JPanel {
         return button;
     }
 
+    //loading the rules from the files
     private void loadRules() {
         StringBuilder rules = new StringBuilder();
 
-        // Reading rules from the file
+        // Reading file
         try (BufferedReader br = new BufferedReader(new FileReader(GAME_RULES_FILE_PATH))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -120,7 +115,7 @@ public class RulesPanel extends JPanel {
             rules.append("Rules could not be loaded.");
         }
 
-        // Setting the text in the rules text area
+        // set the text area
         rulesTextArea.setText(rules.toString());
     }
 }

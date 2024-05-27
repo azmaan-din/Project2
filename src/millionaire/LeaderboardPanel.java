@@ -87,7 +87,7 @@ public class LeaderboardPanel extends JPanel {
         return button;
     }
     
-    //refreshing the leaderboard stats 
+    //refreshing the leaderboard stats using latest data 
     private void fetchLeaderboardData() throws SQLException {
         UserDataManager userFileHandler = new UserDataManager();
         leaderboardData = userFileHandler.getLeaderboardData();
@@ -100,38 +100,41 @@ public class LeaderboardPanel extends JPanel {
             Logger.getLogger(LeaderboardPanel.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    //updating the leaderboard consistently 
     private void updateLeaderboard() {
         leaderboardContainer.removeAll();
-
+        //creating the leaderboard panel
         JLabel titleLabel = new JLabel("Leaderboard", SwingConstants.CENTER);
         titleLabel.setFont(new Font("TimesRoman", Font.BOLD, 24));
         titleLabel.setForeground(Color.YELLOW);
         titleLabel.setBounds(0, 0, 460, 40);
         leaderboardContainer.add(titleLabel);
-
+        
         if (leaderboardData != null && !leaderboardData.isEmpty()) {
             int yPosition = 60;
             int rank = 1;
-
+            //using loop in the leaderboard data and making new panels
             for (Data userData : leaderboardData) {
                 JPanel entryPanel = new JPanel();
                 entryPanel.setLayout(null);
                 entryPanel.setBackground(rank <= 3 ? new Color(0x333333) : new Color(0x202020));
                 entryPanel.setBounds(10, yPosition, 440, 40);
-
+                
+                //making rank label
                 JLabel rankLabel = new JLabel(String.valueOf(rank), SwingConstants.CENTER);
                 rankLabel.setFont(new Font("Arial", Font.BOLD, 16));
                 rankLabel.setForeground(rank <= 1 ? FIRST_PLACE_COLOUR : rank <= 2 ? SECOND_PLACE_COLOUR : rank <= 3 ? THIRD_PLACE_COLOUR : TEXT_COLOUR);
                 rankLabel.setBounds(10, 5, 30, 30);
                 entryPanel.add(rankLabel);
-
+                
+                //making the name label
                 JLabel nameLabel = new JLabel(userData.getFirstname() + " " + userData.getLastname(), SwingConstants.LEFT);
                 nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
                 nameLabel.setForeground(rank <= 1 ? FIRST_PLACE_COLOUR : rank <= 2 ? SECOND_PLACE_COLOUR : rank <= 3 ? THIRD_PLACE_COLOUR : TEXT_COLOUR);
                 nameLabel.setBounds(50, 5, 250, 30);
                 entryPanel.add(nameLabel);
-
+                
+                //making money label
                 JLabel moneyLabel = new JLabel("Money: " + userData.getMoney(), SwingConstants.RIGHT);
                 moneyLabel.setFont(new Font("Arial", Font.PLAIN, 16));
                 moneyLabel.setForeground(rank <= 1 ? FIRST_PLACE_COLOUR : rank <= 2 ? SECOND_PLACE_COLOUR : rank <= 3 ? THIRD_PLACE_COLOUR : TEXT_COLOUR);
@@ -143,7 +146,7 @@ public class LeaderboardPanel extends JPanel {
                 yPosition += 50;
                 rank++;
             }
-
+            //sizing up the leaderboard data
             leaderboardContainer.setPreferredSize(new java.awt.Dimension(460, yPosition + 20));
         } else {
             JLabel noDataLabel = new JLabel("No data available.", SwingConstants.CENTER);
