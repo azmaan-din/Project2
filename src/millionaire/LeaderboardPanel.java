@@ -51,7 +51,7 @@ public class LeaderboardPanel extends JPanel {
         leaderboardContainer.setBackground(BACKGROUND_COLOUR);
 
         JScrollPane scrollPane = new JScrollPane(leaderboardContainer);
-scrollPane.setBounds(20, 80, 600, 400);  // Updated width from 460 to 600
+scrollPane.setBounds(20, 80, 470, 400);  // Updated width from 460 to 600
 scrollPane.setBorder(BorderFactory.createEmptyBorder());
 scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 scrollPane.getVerticalScrollBar().setUnitIncrement(16);
