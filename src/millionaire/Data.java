@@ -2,16 +2,14 @@
 package millionaire;
 
 public class Data {
+    //storing userid,firstname,lastname,age,money
     private int userid;
-    //storing the first name
     private String firstname;
-    //storing the last name
     private String lastname;
-    //storing the age 
     private int age;
-    //storing money
     private int money;
-
+    
+    //constructor
     public Data(int userid, String firstname, String lastname, int age, int money) {
         this.userid = userid;
         this.firstname = firstname;
@@ -19,50 +17,47 @@ public class Data {
         this.age = age;
         this.money = money;
     }
-    
+    //getter for id
     public int getUserId(){
         return userid;
     }
-    
+    //setter for id
     public void setUserId(int userid){
         this.userid = userid;
     }
-
-    // get the first name
+    //getter for firstname
     public String getFirstname() {
         return firstname;
     }
-    // sets the firstname
+    //setter for firstname
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
-
+    //getter for lastname
     public String getLastname() {
         return lastname;
     }
-    // sets the lastname
+    //setter for lastname
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-
-    // gets the age
+    //getter for age
     public int getAge() {
         return age;
     }
-    // sets the age
+    //setter for age
     public void setAge(int age) {
         this.age = age;
     }
-
-    // gets the money
+    //getter for money
     public int getMoney() {
         return money;
     }
-    // sets the money
+    //setter for money
     public void setMoney(int money) {
         this.money = money;
     }
-    // updates the tally
+    //update monkey
     public void updateMoney(int money){
         this.money = this.money+money;
     }

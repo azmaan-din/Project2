@@ -20,14 +20,13 @@ public class GamePanel extends JPanel {
     private int round;
     private CardLayout cardLayout;
     private JPanel mainPanel;
-
     private JLabel questionLabel;
     private JButton[] optionButtons;
     private JLabel moneyLabel;
-
-    private SquarePanel squarePanel; // SquarePanel instance
-    private int squaresCompleted; // Counter to track completed squares
-
+    private SquarePanel squarePanel; 
+    private int squaresCompleted;
+    
+    //user interface colour elements
     private static final Color BACKGROUND_COLOUR = new Color(0x2B2D42);
     private static final Color TEXT_COLOUR = new Color(0xEDF2F4);
     private static final Color BUTTON_COLOUR = new Color(0xEF233C);
@@ -41,55 +40,53 @@ public class GamePanel extends JPanel {
         this.currentQuestionIndex = 0;
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
-
+        //setting background colour
         setLayout(null);
         setBackground(BACKGROUND_COLOUR);
 
+        //customermizing the questiosn font and colour and placement
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("Arial", Font.BOLD, 24));
         questionLabel.setForeground(TEXT_COLOUR);
         questionLabel.setBounds(50, 20, 600, 80);
         add(questionLabel);
-
+        
+        //limiting the amount of options and choosing the placements
+        //made a optiosn panel and arranged layout 
         optionButtons = new JButton[4];
         for (int i = 0; i < optionButtons.length; i++) {
             optionButtons[i] = createButton();
-            // Adjust position for options panel
             optionButtons[i].setBounds(0, 0, 180, 40);
             optionButtons[i].addActionListener(new OptionButtonListener());
         }
-
         JPanel optionsPanel = new JPanel();
-        optionsPanel.setLayout(new GridLayout(4, 1, 0, 10)); // 4 rows, 1 column, with vertical gap of 10 pixels
-        optionsPanel.setBounds(100, 100, 250, 160); // Adjust position and size as needed
-        optionsPanel.setOpaque(false); // Make the panel transparent
+        optionsPanel.setLayout(new GridLayout(4, 1, 0, 10)); 
+        optionsPanel.setBounds(100, 100, 250, 160); 
+        optionsPanel.setOpaque(false); 
         add(optionsPanel);
 
-        // Add option buttons to the optionsPanel
+        //placing the options button
         for (JButton optionButton : optionButtons) {
             optionsPanel.add(optionButton);
         }
-
+        //placements of the money progress label, placements and font colour
         moneyLabel = new JLabel("Current Money: $0");
         moneyLabel.setFont(new Font("Arial", Font.BOLD, 20));
         moneyLabel.setForeground(TEXT_COLOUR);
         moneyLabel.setBounds(50, 350, 600, 30);
         add(moneyLabel);
 
-        // Initialize SquarePanel
+        // Initialize the SquarePanel 
         squarePanel = new SquarePanel();
-        squarePanel.setBounds(50, 400, 600, 50); // Adjust position and size as needed
+        squarePanel.setBounds(50, 400, 600, 50); 
         add(squarePanel);
-
-        squaresCompleted = 0; // Initialize completed squares counter
-
+        squaresCompleted = 0; 
         loadQuestions();
-
         if (!allQuestions.isEmpty()) {
             displayQuestion();
         }
     }
-
+    //creation of buttons
     private JButton createButton() {
         JButton button = new JButton();
         button.setForeground(TEXT_COLOUR);
@@ -111,7 +108,7 @@ public class GamePanel extends JPanel {
 
         return button;
     }
-
+    //loading questions from question bank
     private void loadQuestions() {
         try {
             allQuestions = Questions.createQuestionBank("question_bank.txt");
@@ -120,7 +117,7 @@ public class GamePanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Error loading questions.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    //displaying the questions
     private void displayQuestion() {
         if (currentQuestionIndex < allQuestions.size()) {
             Questions question = allQuestions.get(currentQuestionIndex);
@@ -137,7 +134,7 @@ public class GamePanel extends JPanel {
             endGame();
         }
     }
-
+    //check throught the answer
     private void checkAnswer(String userAnswer) {
         Questions question = allQuestions.get(currentQuestionIndex);
         boolean isCorrect = question.getAnswer().equalsIgnoreCase(userAnswer);
@@ -169,15 +166,14 @@ public class GamePanel extends JPanel {
             userData.setMoney(0);
             endGame();
 
-            // Set the panel background to red for incorrect answer
+            
             setBackground(Color.RED);
         }
 
-        // Update the corresponding square in SquarePanel
         squarePanel.fillSquare(squaresCompleted, isCorrect);
         squaresCompleted++;
     }
-
+    //ending of the game
     private void endGame() {
         UserDataManager userFileHandler = new UserDataManager();
         moneyLabel.setText("Current Money: $" + userData.getMoney());

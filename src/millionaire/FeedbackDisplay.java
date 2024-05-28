@@ -16,45 +16,47 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.swing.BorderFactory;
 
-/**
- * A JPanel for displaying and submitting user feedback. Author: user
- */
-public class FeedbackDisplay extends JPanel {
 
+public class FeedbackDisplay extends JPanel {
+    //user interface elements for feedbacktextArea, submit button, mainmenu,cardlayout and mainpanel
     private JTextArea feedbackTextArea;
     private JButton submitButton;
     private JButton mainMenuButton;
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    //setting colours and fonts sizes to the feedback panel
     private static final Color BACKGROUND_COLOUR = new Color(0x2B2D42);
     private static final Color TEXT_COLOUR = new Color(0xEDF2F4);
     private static final Color BUTTON_COLOUR = new Color(0xEF233C);
     private static final Color BUTTON_HOVER_COLOUR = new Color(0xD90429);
     private static final Color INPUT_COLOUR = new Color(0x8D99AE);
-    private static final Font TEXT_FONT = new Font("Arial", Font.PLAIN, 24); // Increased font size
-    private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 20); // Increased font size
-
+    private static final Font TEXT_FONT = new Font("Arial", Font.PLAIN, 24); 
+    private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 20); 
+    
+    
     public FeedbackDisplay(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
-
+        
+        //setting the background colour
         setLayout(new BorderLayout());
         setBackground(BACKGROUND_COLOUR);
-
+        
+        //setting the feedback areas backgorund, font size and colour
         feedbackTextArea = new JTextArea(10, 30);
-        feedbackTextArea.setFont(TEXT_FONT); // Set larger font for JTextArea
+        feedbackTextArea.setFont(TEXT_FONT); 
         feedbackTextArea.setBackground(INPUT_COLOUR);
         feedbackTextArea.setForeground(TEXT_COLOUR);
         JScrollPane scrollPane = new JScrollPane(feedbackTextArea);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); // Remove horizontal scrollbar
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); 
         add(scrollPane, BorderLayout.CENTER);
-
+        //placing the buttons and locations
         submitButton = createButton("Submit Feedback");
         add(submitButton, BorderLayout.SOUTH);
-
         mainMenuButton = createButton("Main Menu");
         add(mainMenuButton, BorderLayout.NORTH);
-
+        
+        //handle of the submit button for the feedback submission
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,18 +99,18 @@ public class FeedbackDisplay extends JPanel {
         });
 
     }
-
+    //creation of button with specific text
     private JButton createButton(String text) {
         JButton button = new JButton(text);
         button.setForeground(TEXT_COLOUR);
         button.setBackground(BUTTON_COLOUR);
-        button.setFont(BUTTON_FONT); // Set larger font for JButton
+        button.setFont(BUTTON_FONT); 
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(0x0056b3), 1),
                 BorderFactory.createEmptyBorder(5, 15, 5, 15)
         ));
-
+        // changes colour of mosue when hovering over the text area
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {

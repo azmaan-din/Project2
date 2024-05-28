@@ -14,17 +14,20 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author azmaa
+ * @author azmaa,yash
  */
+//DB manager is used for managing database connections and makeing the queries 
 public final class DBManager {
-
+    
+    //username and password
     private static final String USER_NAME = "Project2";
     private static final String PASSWORD = "Project2";
     private static final String URL = "jdbc:derby:UserDB; create=true";
     
 
     Connection conn;
-
+    
+    //constructor 
     public DBManager() {
         establishConnection();
     }
@@ -32,7 +35,7 @@ public final class DBManager {
     public Connection getConnection() {
         return this.conn;
     }
-
+    // makes the connection happen in the database using URL, username and password
     public void establishConnection() {
         try {
             conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
@@ -41,7 +44,7 @@ public final class DBManager {
         }
 
     }
-
+    //closes the connection
     public void closeConnections() {
         if (conn != null) {
             try {
@@ -51,7 +54,7 @@ public final class DBManager {
             }
         }
     }
-
+    //runs SQL query in the database 
     public ResultSet queryDB(String sql) {
 
         Connection connection = this.conn;
@@ -67,7 +70,7 @@ public final class DBManager {
         }
         return resultSet;
     }
-    
+        //runs the SQL update such as insert , update or delete statements
         public void updateDB(String sql) {
 
         Connection connection = this.conn;

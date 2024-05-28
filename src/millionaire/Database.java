@@ -23,7 +23,7 @@ public class Database {
         dbManager = new DBManager();
         conn = dbManager.getConnection();
     }
-
+    // creates the Userdata table for ids , first name , lastname , age and money   
     public void userDataTable() {
         String userdataTableSQl = "CREATE TABLE USERDATA ("
                 + "USERID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
@@ -40,7 +40,7 @@ public class Database {
             System.out.println(e);
         }
     }
-
+    //creates the leaderboard table in database for leaderboard id, user id, firstname,lastname and money
     public void leaderboardTable() {
         String leaderboardTableSQl = "CREATE TABLE LEADERBOARD ("
                 + "LEADERBOARDID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
@@ -58,7 +58,7 @@ public class Database {
             System.out.println(e);
         }
     }
-
+    //gets all the data and display it
     public void viewTableData(String tableName) {
         String query = "SELECT * FROM " + tableName;
         try {
