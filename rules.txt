@@ -1,0 +1,29 @@
+The user is prompted to input their age and first and last name after selecting 
+the "start game" option
+
+When a player will be presented with a maximum of eight questions covering any topic. 
+As they advance the questions become more challenging
+
+The player must be permitted to affirm that the option they have chosen is their final response 
+that confirms that's their answer
+
+The user forfeits the game and is not awarded any money if they provide an inaccurate 
+response to a question.
+
+*Round 1*
+In Round 1, The player will face up to three questions of varying degrees of difficulty.
+Each question has a respective dollar value. These dollar values shall include the
+following: Question 1 is $5,000, Question 2 is $10,000 and Question 3 is $20,000.
+
+*Round 2* 
+If the player successfully completes Round 1 and they choose not to walk away they will move on to Round 2.
+In round 2 the player will face up to three questions of varying degrees of difficulty.
+These dollar values shall include the following amounts: Question 4 is $40,000, Question 5 is $80,000 
+and Question 6 is $160,000.
+ 
+* Round 3 *
+In Round 3, the player will face up to 2 questions of varying degrees of difficulty.
+Each question has a respective dollar value. These dollar values shall include the
+following amounts: Question 7 is 320,000 and Question 8 is $1,000,000
+The player cannot walk away at this round however, once they complete this round they
+will win the game and walk away with 1 million dollars.
